@@ -8,21 +8,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("")
 public class NoticePageController {
-//
-//    // 관리자에서 제공하는 공지사항 페이지
-//    // http://localhost:8888/notice
-//    @GetMapping(path = "notice")
-//    public ModelAndView notice(){
-//        return new ModelAndView("/notice");
-//    }
-//
-//    // 관리자에서 제공하는 공지사항 상세페이지
-//    // http://localhost:8888/noticeReview
-//    @GetMapping(path = "noticeReview")
-//    public ModelAndView noticeReview(){
-//        return new ModelAndView("/notice_review");
-//    }
-//
+
+    // 관리자에서 제공하는 공지사항 페이지
+    // http://localhost:8888/notice
+    @GetMapping(path = "notice")
+    public ModelAndView notice(){
+        return new ModelAndView("/notice");
+    }
+
+    // 관리자에서 제공하는 공지사항 상세페이지
+    // http://localhost:8888/noticeReview
+    @GetMapping(path = "noticeReview")
+    public ModelAndView noticeReview(){
+        return new ModelAndView("/notice_review");
+    }
+
 //    // 식당에서 작성한 공지사항 리스트 페이지
 //    // http://localhost:8888/resNotice
 //    @GetMapping(path = "resNotice")

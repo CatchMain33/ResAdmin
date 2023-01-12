@@ -7,4 +7,5 @@ import java.util.Optional;
 
 public interface ResAdminRepository extends JpaRepository<ResAdmin, Long> {
     Optional<ResAdmin> findByResaUseridAndResaUserpw(String resaUserid, String resaUserpw);
+    Optional<ResAdmin> findByResaUserid (String resaUserid);
 }

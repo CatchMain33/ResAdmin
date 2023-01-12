@@ -1,7 +1,9 @@
 package com.catchmind.resadmin.service;
 
+import com.catchmind.resadmin.model.entity.Menu;
 import com.catchmind.resadmin.model.entity.ResAdmin;
 import com.catchmind.resadmin.model.network.Header;
+import com.catchmind.resadmin.model.network.request.MenuApiRequest;
 import com.catchmind.resadmin.model.network.request.ResAdminApiRequest;
 import com.catchmind.resadmin.model.network.response.ResAdminApiResponse;
 import com.catchmind.resadmin.repository.ResAdminRepository;
@@ -61,7 +63,18 @@ public class ResAdminApiLogicService extends BaseService<ResAdminApiRequest, Res
 
     @Override
     public Header<ResAdminApiResponse> update(Header<ResAdminApiRequest> request) {
-        return null;
+        ResAdminApiRequest resAdminApiRequest = request.getData();
+        Optional<ResAdmin> resAdmin = resAdminRepository.findByResaUserid(resAdminApiRequest.getResaUserid());
+        System.out.println(resAdmin);
+        return resAdmin.map(
+                        user->{
+                            user.setResaUserpw(resAdminApiRequest.getResaUserpw());
+                            return user;
+                        }).map(user-> baseRepository.save(user))
+                .map(user->response(user))
+                .map(Header::OK)
+                .orElseGet(()->Header.ERROR("데이터 없음")
+                );
     }
 
     @Override
@@ -76,6 +89,7 @@ public class ResAdminApiLogicService extends BaseService<ResAdminApiRequest, Res
         if(!resAdmin.isEmpty()){
             return Header.Ok();
         }
+
         return Header.ERROR("아이디 또는 비밀번호가 틀렸음!");
     }
 
