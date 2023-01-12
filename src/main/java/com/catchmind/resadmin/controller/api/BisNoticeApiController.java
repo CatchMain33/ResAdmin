@@ -60,9 +60,12 @@ public class BisNoticeApiController {
     }
 
     @PutMapping("/resNoticeWriteModify/{binIdx}")
-    public  String update(BisNoticeDto bisNoticeDto) {
+    public  String update(BisNoticeDto bisNoticeDto) throws UnsupportedEncodingException {
         bisNoticeApiLogicService.savePost(bisNoticeDto);
-        return "redirect:/resNotice";
+        String resaBisName = bisNoticeDto.getResaBisName();
+        System.out.println(resaBisName);
+        String url = URLEncoder.encode(resaBisName, "UTF-8");
+        return "redirect:/resNotice/" + url;
     }
 
     @DeleteMapping("/resNoticeWrite/{binIdx}")
