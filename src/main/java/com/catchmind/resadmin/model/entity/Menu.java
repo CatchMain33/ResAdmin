@@ -24,6 +24,4 @@ public class Menu extends BaseEntity2 implements Auditable2 {
     private String meName;
     private String meContent;
     private String mePrice;
-
-
 }

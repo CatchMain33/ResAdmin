@@ -16,5 +16,4 @@ public class BistroInfoApiRequest {  // 프론트 > 백
     private String bisRegion;
     private String bisLunch;
     private String bisDinner;
-    private String bisConvenience;
 }

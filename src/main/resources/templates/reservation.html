@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
 <!-- head.html -->
 <div th:replace="fragment/head :: head"></div>
 <style>
@@ -21,8 +22,10 @@
     }
 </style>
 <!-- head.html 끝 -->
-
+<script src="https://unpkg.com/vue@3"></script>
+<link rel="stylesheet" href="/css/modal.css">
 <body id="page-top">
+<div id="app">
 <!-- header.html -->
 <div th:replace="fragment/header :: header"></div>
 <!-- header.html 끝-->
@@ -33,7 +36,7 @@
         <!-- aside.html 끝 -->
 
 
-        <section class="content">
+        <section class="content" >
             <div class="row" style="display: block">
                 <div>
                     <div style="text-align: right;
@@ -42,391 +45,463 @@
                     padding-bottom: 24px;
                     color: #5a5c69;
                     padding-right: 18px;">
-                        <a href="" style="color: #5a5c69; text-decoration: none;">&lt;</a>
-                        <a href="reservation_calander.html" style="color: #5a5c69; text-decoration: none;">12월 15일</a>
-                        <a href="" style="color: #5a5c69; text-decoration: none;">&gt;</a>
+                        <button type="button" id="back" style="color: #5a5c69; text-decoration: none;">&lt;</button>
+                        <a href="/reservationCalender" style="color: #5a5c69; text-decoration: none;"><span id="month"></span>월 <span id="day"></span>일</a>
+                        <button type="button" id="front" style="color: #5a5c69; text-decoration: none;">&gt;</button>
                     </div>
                 </div>
                 <div class="col-md-7" style="max-width: 100%">
                     <article class="widget widget--tabbed">
                         <div class="tabs">
+                            <div>
                             <!-- <div class="number-entries">
                                 <input class="spinner" name="value" value="3" />
                             </div> -->
-                            <input type="radio" name="t" id="tab1" checked>
-                            <label for="tab1" class="tabs__tab" style="display: flex;">
-                                <div class="time">10시</div>
-                                <input type="checkbox" id="s1" class="sw" checked />
-                                <label class="switch switch--orange" for="s1" ></label>
-                            </label>
-                            <input type="radio" name="t" id="tab2">
-                            <label for="tab2" class="tabs__tab"style="display: flex;">
-                                <div class="time">12시</div>
-                                <input type="checkbox" id="s2" class="sw" checked />
-                                <label class="switch switch--orange" for="s2"></label>
-                            </label>
-                            <input type="radio" name="t" id="tab3">
-                            <label for="tab3" class="tabs__tab" style="display: flex;">
-                                <div class="time">14시</div>
-                                <input type="checkbox" id="s3" class="sw" checked />
-                                <label class="switch switch--orange" for="s3"></label>
-                            </label>
-                            <input type="radio" name="t" id="tab4">
-                            <label for="tab4" class="tabs__tab"style="display: flex;">
-                                <div class="time">17시</div>
-                                <input type="checkbox" id="s4" class="sw" checked />
-                                <label class="switch switch--orange" for="s4"></label>
-                            </label>
-                            <input type="radio" name="t" id="tab5">
-                            <label for="tab5" class="tabs__tab"style="display: flex;">
-                                <div class="time">19시</div>
-                                <input type="checkbox" id="s5" class="sw" checked />
-                                <label class="switch switch--orange" for="s5"></label>
-                            </label>
-                            <input type="radio" name="t" id="tab6">
-                            <label for="tab6" class="tabs__tab"style="display: flex;">
-                                <div class="time">21시</div>
-                                <input type="checkbox" id="s6" class="sw" checked />
-                                <label class="switch switch--orange" for="s6"></label>
-                            </label>
-                            <div class="tabs__content">
+                                <input type="radio" name="t" id="tab1" checked>
+                                <label for="tab1" id="hour1" class="tabs__tab" style="display: flex;">
+                                    <div class="time"><span id="time1">10</span>시 타임 </div>
+                                </label>
+                                <input type="radio" name="t" id="tab2">
+                                <label for="tab2" id="hour2" class="tabs__tab"style="display: flex;">
+                                    <div class="time"><span id="time2">12</span>시 타임 </div>
+                                </label>
+                                <input type="radio" name="t" id="tab3">
+                                <label for="tab3" id="hour3" class="tabs__tab" style="display: flex;">
+                                    <div class="time"><span id="time3">14</span>시 타임 </div>
+                                </label>
+                                <input type="radio" name="t" id="tab4">
+                                <label for="tab4" id="hour4" class="tabs__tab"style="display: flex;">
+                                    <div class="time"><span id="time4">17</span>시 타임 </div>
+                                </label>
+                                <input type="radio" name="t" id="tab5">
+                                <label for="tab5" id="hour5" class="tabs__tab"style="display: flex;">
+                                    <div class="time"><span id="time5">19</span>시 타임 </div>
+                                </label>
+                                <input type="radio" name="t" id="tab6">
+                                <label for="tab6" id="hour6" class="tabs__tab"style="display: flex;">
+                                    <div class="time"><span id="time6">21</span>시 타임</div>
+                                </label>
+                                <input type="radio" name="t" id="tab7">
+                                <label for="tab7" id="status" class="tabs__tab"style="display: flex;">
+                                    <div class="restatus">예약상태변경</div>
+                                </label>
+                            </div>
+                            <div class="tabs__content" >
                                 <div class="tabs__content--1"id="tabs__content--1" style=" min-width: 100%;">
-
-                                    <div class="media social_msg">
-                                        <div>
+                                    <div class="media social_msg" id="itemList1">
+                                        <div v-for="dto in itemList1">
                                             <div class="res_list" >
-                                                <div>2</div>
-                                                <div>홍길동</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
+                                                <div id="check1">{{dto.visitName}}</div>
+                                                <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
+                                                <div>{{dto.resPerson}}명</div>
+                                                <div>{{dto.visitHp}}</div>
+                                                <div>{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                </div>
+                                                <div class="modal hidden1">
+                                                    <div class="modal">
+                                                        <div class="modal__overlay"></div>
+                                                        <div class="modal__contents">
+                                                            <div class="modal__header">
+                                                                cancel or noshow
+                                                            </div>
+                                                            <div class="modal__main">
+                                                                <p>
+                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
+                                                                </p>
+                                                                <p>
+                                                                    방문날짜 :
+                                                                    <span class="month">{{dto.resMonth}}</span>월
+                                                                    <span class="day">{{dto.resDay}} </span>일
+                                                                    <span class="time">{{dto.resTime}}</span>시
+                                                                </p>
+                                                                <p>
+                                                                    status :
+                                                                    <select>
+                                                                        <option value="DONE">방문완료</option>
+                                                                        <option value="CANCEL">예약취소</option>
+                                                                        <option value="NOSHOW">노쇼</option>
+                                                                    </select>
+                                                                </p>
+                                                                <p>
+                                                                    reason :<input type="text" name="reason">
+                                                                </p>
+                                                                <div>
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div> <!-- /social-msg -->
-                                    <div class="media social_msg">
-                                        <div>
-                                            <div class="res_list">
-                                                <div>2</div>
-                                                <div>홍길동</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
-                                                <div style="    padding: 0;
-                                                border: none;
-                                                text-align: center;
-                                                ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /social-msg -->
-
                                 </div> <!-- /tabs__content 1 -->
 
                                 <div class="tabs__content--2"id="tabs__content--2"style=" min-width: 100%;">
-                                    <div class="media social_msg">
-                                        <div>
-                                            <div class="res_list" >
-                                                <div>2</div>
-                                                <div>반하나</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
-                                                <div style="    padding: 0;
-                                                border: none;
-                                                text-align: center;
-                                                ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /social-msg -->
-                                    <div class="media social_msg">
-                                        <div>
+                                    <div class="media social_msg" id="itemList2">
+                                        <div v-for="dto in itemList2">
                                             <div class="res_list">
-                                                <div>2</div>
-                                                <div>반하나</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
+                                                <div id="check2">{{dto.visitName}}</div>
+                                                <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
+                                                <div>{{dto.resPerson}}명</div>
+                                                <div>{{dto.visitHp}}</div>
+                                                <div>{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                </div>
+                                                <div class="modal hidden1">
+                                                    <div class="modal">
+                                                        <div class="modal__overlay"></div>
+                                                        <div class="modal__contents">
+                                                            <div class="modal__header">
+                                                                cancel or noshow
+                                                            </div>
+                                                            <div class="modal__main">
+                                                                <p>
+                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
+                                                                </p>
+                                                                <p>
+                                                                    방문날짜 :
+                                                                    <span class="month">{{dto.resMonth}}</span>월
+                                                                    <span class="day">{{dto.resDay}} </span>일
+                                                                    <span class="time">{{dto.resTime}}</span>시
+                                                                </p>
+                                                                <p>
+                                                                    status :
+                                                                    <select>
+                                                                        <option value="DONE">방문완료</option>
+                                                                        <option value="CANCEL">예약취소</option>
+                                                                        <option value="NOSHOW">노쇼</option>
+                                                                    </select>
+                                                                </p>
+                                                                <p>
+                                                                    reason :<input type="text" name="reason">
+                                                                </p>
+                                                                <div>
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div> <!-- /social-msg -->
-
-
                                 </div> <!-- /tabs__content 2 -->
 
                                 <div class="tabs__content--3"id="tabs__content--3"style=" min-width: 100%;">
-                                    <div class="media social_msg">
-                                        <div>
-                                            <div class="res_list" >
-                                                <div>2</div>
-                                                <div>오렌지</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
-                                                <div style="    padding: 0;
-                                                border: none;
-                                                text-align: center;
-                                                ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /social-msg -->
-                                    <div class="media social_msg">
-                                        <div>
+                                    <div class="media social_msg" id="itemList3">
+                                        <div v-for="dto in itemList3">
                                             <div class="res_list">
-                                                <div>2</div>
-                                                <div>오렌지</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
+                                                <div id="check3">{{dto.visitName}}</div>
+                                                <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
+                                                <div>{{dto.resPerson}}명</div>
+                                                <div>{{dto.visitHp}}</div>
+                                                <div>{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                </div>
+                                                <div class="modal hidden1">
+                                                    <div class="modal">
+                                                        <div class="modal__overlay"></div>
+                                                        <div class="modal__contents">
+                                                            <div class="modal__header">
+                                                                cancel or noshow
+                                                            </div>
+                                                            <div class="modal__main">
+                                                                <p>
+                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
+                                                                </p>
+                                                                <p>
+                                                                    방문날짜 :
+                                                                    <span class="month">{{dto.resMonth}}</span>월
+                                                                    <span class="day">{{dto.resDay}} </span>일
+                                                                    <span class="time">{{dto.resTime}}</span>시
+                                                                </p>
+                                                                <p>
+                                                                    status :
+                                                                    <select>
+                                                                        <option value="DONE">방문완료</option>
+                                                                        <option value="CANCEL">예약취소</option>
+                                                                        <option value="NOSHOW">노쇼</option>
+                                                                    </select>
+                                                                </p>
+                                                                <p>
+                                                                    reason :<input type="text" name="reason">
+                                                                </p>
+                                                                <div>
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div> <!-- /social-msg -->
-
-
                                 </div> <!-- /tabs__content 3 -->
 
                                 <div class="tabs__content--4"id="tabs__content--4"style=" min-width: 100%;">
-                                    <div class="media social_msg">
-                                        <div>
+                                    <div class="media social_msg" id="itemList4">
+                                        <div v-for="dto in itemList4">
                                             <div class="res_list" >
-                                                <div>2</div>
-                                                <div>김사과과</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
+                                                <div id="check4">{{dto.visitName}}</div>
+                                                <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
+                                                <div>{{dto.resPerson}}명</div>
+                                                <div>{{dto.visitHp}}</div>
+                                                <div>{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                </div>
+                                                <div class="modal hidden1">
+                                                    <div class="modal">
+                                                        <div class="modal__overlay"></div>
+                                                        <div class="modal__contents">
+                                                            <div class="modal__header">
+                                                                cancel or noshow
+                                                            </div>
+                                                            <div class="modal__main">
+                                                                <p>
+                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
+                                                                </p>
+                                                                <p>
+                                                                    방문날짜 :
+                                                                    <span class="month">{{dto.resMonth}}</span>월
+                                                                    <span class="day">{{dto.resDay}} </span>일
+                                                                    <span class="time">{{dto.resTime}}</span>시
+                                                                </p>
+                                                                <p>
+                                                                    status :
+                                                                    <select>
+                                                                        <option value="DONE">방문완료</option>
+                                                                        <option value="CANCEL">예약취소</option>
+                                                                        <option value="NOSHOW">노쇼</option>
+                                                                    </select>
+                                                                </p>
+                                                                <p>
+                                                                    reason :<input type="text" name="reason">
+                                                                </p>
+                                                                <div>
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div> <!-- /social-msg -->
-                                    <div class="media social_msg">
-                                        <div>
-                                            <div class="res_list">
-                                                <div>2</div>
-                                                <div>김사과</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
-                                                <div style="    padding: 0;
-                                                border: none;
-                                                text-align: center;
-                                                ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /social-msg -->
-
                                 </div> <!-- /tabs__content 3 -->
 
                                 <div class="tabs__content--5" id="tabs__content--5"style=" min-width: 100%;">
-                                    <div class="media social_msg">
-                                        <div>
+                                    <div class="media social_msg" id="itemList5">
+                                        <div v-for="dto in itemList5">
                                             <div class="res_list" >
-                                                <div>2</div>
-                                                <div>배애리</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
+                                                <div id="check5">{{dto.visitName}}</div>
+                                                <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
+                                                <div>{{dto.resPerson}}명</div>
+                                                <div>{{dto.visitHp}}</div>
+                                                <div>{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                </div>
+                                                <div class="modal hidden1">
+                                                    <div class="modal">
+                                                        <div class="modal__overlay"></div>
+                                                        <div class="modal__contents">
+                                                            <div class="modal__header">
+                                                                cancel or noshow
+                                                            </div>
+                                                            <div class="modal__main">
+                                                                <p>
+                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
+                                                                </p>
+                                                                <p>
+                                                                    방문날짜 :
+                                                                    <span class="month">{{dto.resMonth}}</span>월
+                                                                    <span class="day">{{dto.resDay}} </span>일
+                                                                    <span class="time">{{dto.resTime}}</span>시
+                                                                </p>
+                                                                <p>
+                                                                    status :
+                                                                    <select>
+                                                                        <option value="DONE">방문완료</option>
+                                                                        <option value="CANCEL">예약취소</option>
+                                                                        <option value="NOSHOW">노쇼</option>
+                                                                    </select>
+                                                                </p>
+                                                                <p>
+                                                                    reason :<input type="text" name="reason">
+                                                                </p>
+                                                                <div>
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div> <!-- /social-msg -->
-                                    <div class="media social_msg">
-                                        <div>
-                                            <div class="res_list">
-                                                <div>2</div>
-                                                <div>배애리</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
-                                                <div style="    padding: 0;
-                                                border: none;
-                                                text-align: center;
-                                                ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /social-msg -->
-
-
                                 </div> <!-- /tabs__content 2 -->
 
                                 <div class="tabs__content--6" id="tabs__content--6"style=" min-width: 100%;">
-                                    <div class="media social_msg">
-                                        <div>
+                                    <div class="media social_msg" id="itemList6">
+                                        <div v-for="dto in itemList6">
                                             <div class="res_list" >
-                                                <div>2</div>
-                                                <div>체리</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
+                                                <div id="check6">{{dto.visitName}}</div>
+                                                <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
+                                                <div>{{dto.resPerson}}명</div>
+                                                <div>{{dto.visitHp}}</div>
+                                                <div>{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                </div>
+                                                <div class="modal hidden1">
+                                                    <div class="modal">
+                                                        <div class="modal__overlay"></div>
+                                                        <div class="modal__contents">
+                                                            <div class="modal__header">
+                                                                cancel or noshow
+                                                            </div>
+                                                            <div class="modal__main">
+                                                                <p>
+                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
+                                                                </p>
+                                                                <p>
+                                                                    방문날짜 :
+                                                                    <span class="month">{{dto.resMonth}}</span>월
+                                                                    <span class="day">{{dto.resDay}} </span>일
+                                                                    <span class="time">{{dto.resTime}}</span>시
+                                                                </p>
+                                                                <p>
+                                                                    status :
+                                                                    <select>
+                                                                        <option value="DONE">방문완료</option>
+                                                                        <option value="CANCEL">예약취소</option>
+                                                                        <option value="NOSHOW">노쇼</option>
+                                                                    </select>
+                                                                </p>
+                                                                <p>
+                                                                    reason :<input type="text" name="reason">
+                                                                </p>
+                                                                <div>
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div> <!-- /social-msg -->
-                                    <div class="media social_msg">
-                                        <div>
-                                            <div class="res_list">
-                                                <div>2</div>
-                                                <div>체리</div>
-                                                <div>2022-12-21 17시</div>
-                                                <div>010-1111-1111</div>
-                                                <div>4명</div>
-                                                <div>새우 알레르기, 땅콩 알레르기</div>
-                                                <div style="    padding: 0;
-                                                border: none;
-                                                text-align: center;
-                                                ">
-                                                    <!-- <button id="link">Redirect to Utopian</button> -->
-                                                    <a href="#" class="btn cyan small" style="margin: 0;" id="link">예약확인</a>
-                                                    <a href="#" class="btn red small" style="margin: 0;" id="open">예약취소</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /social-msg -->
-
-
                                 </div> <!-- /tabs__content 2 -->
 
+                                <div class="tabs__content--7"id="tabs__content--7" style=" min-width: 100%;">
+                                    <div class="media social_msg" style="display: flex" id="itemList7">
+                                                        <div>
+                                                            <p>
+                                                                일정 :
+                                                                <span class="status_month"></span>월
+                                                                <span class="status_day"></span>일
+                                                            </p>
+                                                            <p>
+                                                                <span class="status_time1">10</span>시 타임 :
+                                                                <select id="status10">
+                                                                    <option value="1">예약가능</option>
+                                                                    <option value="0">예약 불가능</option>
+                                                                </select>
+                                                            </p>
+                                                            <p>
+                                                                <span class="status_time2">12</span>시 타임 :
+                                                                <select id="status12">
+                                                                    <option value="1">예약가능</option>
+                                                                    <option value="0">예약 불가능</option>
+                                                                </select>
+                                                            </p>
+                                                            <p>
+                                                                <span class="status_time3">14</span>시 타임 :
+                                                                <select id="status14">
+                                                                    <option value="1">예약가능</option>
+                                                                    <option value="0">예약 불가능</option>
+                                                                </select>
+                                                            </p>
+                                                            <p>
+                                                                <span class="status_time4">17</span>시 타임 :
+                                                                <select id="status17">
+                                                                    <option value="1">예약가능</option>
+                                                                    <option value="0">예약 불가능</option>
+                                                                </select>
+                                                            </p>
+                                                            <p>
+                                                                <span class="status_time5">19</span>시 타임 :
+                                                                <select id="status19">
+                                                                    <option value="1">예약가능</option>
+                                                                    <option value="0">예약 불가능</option>
+                                                                </select>
+                                                            </p>
+                                                            <p>
+                                                                <span class="status_time6">21</span>시 타임 :
+                                                                <select id="status21">
+                                                                    <option value="1">예약가능</option>
+                                                                    <option value="0">예약 불가능</option>
+                                                                </select>
+                                                            </p>
+                                                            <div>
+                                                                <button id="changestatus" class="btn btn-skyblue" type="submit">
+                                                                    보내기
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div style="margin-left: 50px">
+                                                            <p>현재 예약상태</p>
+                                                            <div v-for="dto in itemList7">
+                                                                <p>{{dto.shopResTime}}시 예약가능 여부 : <span v-if="dto.shopResStatus==true">가능</span><span v-if="dto.shopResStatus==false">불가능</span></p>
+                                                            </div>
+                                                        </div>
+                                    </div> <!-- /social-msg -->
+                                </div> <!-- /tabs__content 1 -->
 
                             </div> <!-- /tabs__content CONTAINER -->
-
                         </div> <!-- /widget__tabs -->
-
                     </article>
                 </div>
             </div> <!-- /row -->
         </section> <!-- /content -->
-
     <!-- End of Page Wrapper -->
-
-    <!-- Logout Modal-->
-
-
-    <div class="popup">
-        <div class="header">
-            취소 사유 입력
-        <img class="close-icon" src="./images/close.png">
-        </div>
-        <div class="widget__content contents">
-            <h3 class="widget__title" style="    padding-left: 15px;">이메론</h3>
-            <p style="    padding-left: 15px;">예약자 번호 : 02-1234-1234</p>
-            <p style="    padding-left: 15px;">예약 날짜 및 시간 : 2022-12-22 15시</p>
-            <fieldset style="    padding-left: 15px;">
-                <div style="    margin-top: 13px;
-                font-size: 17px;
-                color: gray;
-                font-weight: bold;
-                margin-bottom: 13px;
-                ;">
-                    취소 사유 선택
-                    <div style="border-bottom: 1px solid;
-                    width: 95%; margin-top: 11px;"></div>
-                </div>
-            
-                <div>
-                  <input type="radio" id="" name="" value=""
-                         >
-                  <label for="" style="color: gray;">노쇼</label>
-                </div>
-                <div>
-                  <input type="radio" id="dewey" name="drone" value="dewey">
-                  <label for="dewey" style="color: gray;">취소 사유 입력
-                    <input type="text" name="" id="" placeholder="취소 사유를 입력해주세요" style=" height: 35px; border: 1px solid gray;">
-                  </label>
-                </div>
-            </fieldset>
-                <div style="    text-align: center;
-                margin-top: 115px;">
-                    
-                    <a href="reservation_cancel.html" class="btn red small" style="margin: 0;" id="open">취소하기</a>
-                </div>
         </div>
     </div>
-
-    <script src="js/popup.js"></script>
     <script src="js/alert.js"></script>
-    <script src="chart.js/Chart.min.js"></script>
-    <script src="js_demo/demo/chart-area-demo.js"></script>
-    <script src="js_demo/demo/chart-pie-demo.js"></script>
+    <script src="js/resStatus.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="amcharts/amcharts.js"></script>
-    <script type="text/javascript" src="amcharts/serial.js"></script>
-    <script type="text/javascript" src="amcharts/pie.js"></script>
-    <script type="text/javascript" src="js/chart.js"></script>
     <script type="text/javascript" src="js/map.js"></script>
     <script src="jquery-jvectormap-1.2.2/jquery-jvectormap-1.2.2.min.js"></script>
     <script src="jquery-jvectormap-1.2.2/jquery-jvectormap-us-aea-en.js"></script>
@@ -462,7 +537,389 @@
                 $('#tabs__content--6').show().siblings('div').hide();
             })
         });
-
+        $(function() {
+            $('#tab7').click(function() {
+                $('#tabs__content--7').show().siblings('div').hide();
+            })
+        });
     </script>
+        <script defer type="text/javascript">
+            let date = new Date();
+            let month = ("00"+(date.getMonth()+1).toString()).slice(-2);
+            let day = ("00"+(date.getDate()).toString()).slice(-2);
+            let month1 = document.querySelector('#month');
+            let day1 = document.querySelector('#day');
+            let month2 = document.querySelector('.status_month');
+            let day2 = document.querySelector('.status_day');
+            month1.innerText = month;
+            day1.innerText = day;
+            month2.innerText = month;
+            day2.innerText = day;
+
+
+            const back = document.querySelector('#back');
+            const front = document.querySelector('#front');
+            back.addEventListener('click', minus);
+            front.addEventListener('click', plus);
+
+            const time1 = document.querySelector('#time1');
+            const time2 = document.querySelector('#time2');
+            const time3 = document.querySelector('#time3');
+            const time4 = document.querySelector('#time4');
+            const time5 = document.querySelector('#time5');
+            const time6 = document.querySelector('#time6');
+
+            function datelist(){
+                let month = ("00"+(date.getMonth()+1).toString()).slice(-2);
+                let day = ("00"+(date.getDate()).toString()).slice(-2);
+                month1.innerHTML = month;
+                day1.innerHTML = day;
+                month2.innerHTML = month;
+                day2.innerHTML = day;
+            }
+
+            function minus(){
+                date = new Date(date.setDate(date.getDate()-1));
+                datelist();
+                alldata();
+                status1();
+            }
+            function plus(){
+                date = new Date(date.setDate(date.getDate()+1));
+                datelist();
+                alldata();
+                status1();
+            }
+
+            const { createApp } = Vue
+            let itemList1 = createApp({
+                data() {
+                    return {
+                        itemList1: {}
+                    }
+                }
+            }).mount('#itemList1');
+            let itemList2 = createApp({
+                data() {
+                    return {
+                        itemList2: {}
+                    }
+                }
+            }).mount('#itemList2');
+            let itemList3 = createApp({
+                data() {
+                    return {
+                        itemList3: {}
+                    }
+                }
+            }).mount('#itemList3');
+            let itemList4 = createApp({
+                data() {
+                    return {
+                        itemList4: {}
+                    }
+                }
+            }).mount('#itemList4');
+            let itemList5 = createApp({
+                data() {
+                    return {
+                        itemList5: {}
+                    }
+                }
+            }).mount('#itemList5');
+            let itemList6 = createApp({
+                data() {
+                    return {
+                        itemList6: {}
+                    }
+                }
+            }).mount('#itemList6');
+            let itemList7 = createApp({
+                data() {
+                    return {
+                        itemList7: {},
+                    }
+                }
+            }).mount('#itemList7');
+
+            function alldata(){
+                datedatas1();
+                datedatas2();
+                datedatas3();
+                datedatas4();
+                datedatas5();
+                datedatas6();
+                status1();
+            }
+            function datedatas1(){
+                let data1 = {
+                    resMonth : month1.innerText,
+                    resDay : day1.innerText,
+                    resTime : time1.innerText}
+                $.ajax({
+                    url: "/api/reservation/data1",
+                    type: "GET",
+                    dataType: "json",
+                    processData: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: data1,
+                    success: function(result) {
+                        if (result) {
+                            itemList1.itemList1 = result.data;
+                            // if(!document.querySelector('#check1').innerText){
+                            //     itemList1.boolean1 = true;}
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+            }
+            function datedatas2(){
+                let data2 = {
+                    resMonth : month1.innerText,
+                    resDay : day1.innerText,
+                    resTime : time2.innerText}
+                $.ajax({
+                    url: "/api/reservation/data2",
+                    type: "GET",
+                    dataType: "json",
+                    processData: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: data2,
+                    success: function(result) {
+                        if (result.data != null) {
+                            itemList2.itemList2 = result.data;
+                            // if(!document.querySelector('#check2').innerText){
+                            // itemList2.boolean2 = true;}
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+            }
+            function datedatas3(){
+                let data3 = {
+                    resMonth : month1.innerText,
+                    resDay : day1.innerText,
+                    resTime : time3.innerText}
+                $.ajax({
+                    url: "/api/reservation/data3",
+                    type: "GET",
+                    dataType: "json",
+                    processData: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: data3,
+                    success: function(result) {
+                        if (result) {
+                            itemList3.itemList3 = result.data;
+                            // if(!document.querySelector('#check3').innerText){
+                            //     itemList3.boolean3 = true;}
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+            }
+            function datedatas4(){
+                let data4 = {
+                    resMonth : month1.innerText,
+                    resDay : day1.innerText,
+                    resTime : time4.innerText}
+                $.ajax({
+                    url: "/api/reservation/data4",
+                    type: "GET",
+                    dataType: "json",
+                    processData: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: data4,
+                    success: function(result) {
+                        if (result) {
+                            itemList4.itemList4 = result.data;
+                            // if(!document.querySelector('#check4').innerText){
+                            //     itemList4.boolean4 = true;}
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+            }
+            function datedatas5(){
+                let data5 = {
+                    resMonth : month1.innerText,
+                    resDay : day1.innerText,
+                    resTime : time5.innerText}
+                $.ajax({
+                    url: "/api/reservation/data5",
+                    type: "GET",
+                    dataType: "json",
+                    processData: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: data5,
+                    success: function(result) {
+                        if (result) {
+                            itemList5.itemList5 = result.data;
+                            // if(!document.querySelector('#check5').innerText){
+                            //     itemList5.boolean5 = true;}
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+            }
+            function datedatas6(){
+                let data6 = {
+                resMonth : month1.innerText,
+                resDay : day1.innerText,
+                resTime : time6.innerText}
+                $.ajax({
+                    url: "/api/reservation/data6",
+                    type: "GET",
+                    dataType: "json",
+                    processData: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: data6,
+                    success: function(result) {
+                        if (result) {
+                            itemList6.itemList6 = result.data;
+                            // if(!document.querySelector('#check6').innerText){
+                            //     itemList6.boolean6 = true;}
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+            }
+            function status1(){
+                let data = {
+                    shopResMonth : month1.innerText,
+                    shopResDay : day1.innerText}
+                $.ajax({
+                    url: "/api/status/findstatus",
+                    type: "GET",
+                    dataType: "json",
+                    processData: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: data,
+                    success: function(result) {
+                        if (result) {
+                            console.log(result.data[0]);
+                            itemList7.itemList7 = result.data;
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+            }
+                alldata();
+                datelist();
+
+            // $(".modal_open").click(function(event){
+            //     console.log(event.target)
+            //     let dv = event.target;
+            //     console.log(dv);
+            //     // console.log(dv.parentNode.childNodes);
+            // });
+
+            function clicked(event){
+                let dv = event.parentNode.parentNode.childNodes[6];
+                dv.classList.remove("hidden1")
+            }
+            function cclicked(event){
+                let dv = event.parentNode.parentNode.parentNode.parentNode.parentNode;
+                dv.classList.add("hidden1")
+            }
+
+            function modify(event){
+                let dv = event.parentNode.parentNode.parentNode.parentNode.parentNode;
+                let name = event.parentNode.parentNode.childNodes[0].childNodes[1].textContent;
+                let status = event.parentNode.parentNode.childNodes[2].childNodes[1].value;
+                let reason = event.parentNode.parentNode.childNodes[3].childNodes[1].value;
+                let month = event.parentNode.parentNode.childNodes[1].childNodes[1].textContent;
+                let day = event.parentNode.parentNode.childNodes[1].childNodes[3].textContent;
+                let time = event.parentNode.parentNode.childNodes[1].childNodes[5].textContent;
+                console.log(dv);
+                // console.log(name);
+                console.log(status);
+                // console.log(reason);
+                // console.log(month);
+                // console.log(day);
+                // console.log(time);
+                if (status == 'NOSHOW'){
+                    let data = {
+                        prName:name
+                    }
+                    $.ajax({
+                        url: "/api/profile/noshow",
+                        type: "GET",
+                        dataType: "json",
+                        processData: true,
+                        contentType: "application/json; charset=UTF-8",
+                        data: data,
+                        success: function(result) {
+                            if (result) {
+                                console.log('노쇼횟수 1회 추가 완료!');
+                            } else {
+                                alert("전송된 값 없음");
+                            }
+                        },
+                        error: function() {
+                            alert("에러 발생");
+                        }
+                    });
+                }
+
+                let data = {
+                    resMonth : month,
+                    resDay : day,
+                    resTime : time,
+                    visitName:name,
+                    resStatus:status,
+                    resReason:reason
+                }
+                $.ajax({
+                    url: "/api/reservation/modify",
+                    type: "GET",
+                    dataType: "json",
+                    processData: true,
+                    contentType: "application/json; charset=UTF-8",
+                    data: data,
+                    success: function(result) {
+                        if (result) {
+                            alert("변경완료!")
+                            console.log(dv);
+                            dv.classList.add("hidden1")
+                            alldata();
+                            datelist();
+                        } else {
+                            alert("전송된 값 없음");
+                        }
+                    },
+                    error: function() {
+                        alert("에러 발생");
+                    }
+                });
+            }
+        </script>
 </body>
 </html>

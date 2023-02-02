@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<!-- head.html -->
+<div th:replace="fragment/head :: head"></div>
+<!-- head.html 끝 -->
+<body>
+<!-- header.html -->
+<div th:replace="fragment/header :: header"></div>
+<!-- header.html 끝-->
+<div class="wrapper">
+  <!-- aside.html 시작 -->
+  <div th:replace="fragment/aside :: aside"></div>
+  <!-- aside.html 끝 -->
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <article class="widget">
+          <header class="widget__header">
+            <h3 class="widget__title" style="font-size: 21px;
+                        font-weight: bold;">식당 정원 및 테이블 등록</h3>
+          </header>
+          <form>
+            <div class="widget__content">
+              <input type="text" class="input-text" id="totcapacity" name="totcapacity" placeholder="테이블당 인원" style="padding-left: 12px;"/>
+              <input type="text" class="input-text" id="tottable" name="tottable" placeholder="총 테이블수" style="padding-left: 12px;"/>
+              <div style="width: 100%;">
+                <div style="text-align: right;">
+                  <a id="bdBtn" class="btn red small" style="margin: 0;color: white">저장하기</a>
+                </div>
+              </div>
+            </div>
+          </form>
+        </article>
+      </div>
+    </div>
+  </section> <!-- /content -->
+</div> <!-- /wrapper -->
+<!--footer.html 시작-->
+<div th:replace="fragment/footer :: footer"></div>
+<!--footer.html 끝-->
+<script src="/js/capacity.js"></script>
+</body>
+</html>

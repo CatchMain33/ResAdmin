@@ -3,7 +3,7 @@
 <!-- head.html -->
 <div th:replace="fragment/head :: head"></div>
 <!-- head.html 끝 -->
-
+<script src="https://unpkg.com/vue@3"></script>
 <body id="page-top">
 
 <!-- header.html -->
@@ -36,30 +36,51 @@
                                 font-weight: bold;
                                 padding-bottom: 24px;
                                 color: #5a5c69;">
-                                <a href="" style="color: #5a5c69; text-decoration: none;">&lt;</a> 
-                                <a href="/reservationCalender" style="color: #5a5c69; text-decoration: none;">12월 15일</a>
-                                <a href="" style="color: #5a5c69; text-decoration: none;">&gt;</a>
+                                    <button type="button" id="back" style="color: #5a5c69; text-decoration: none;">&lt;</button>
+                                    <a href="/reservationCalender" style="color: #5a5c69; text-decoration: none;"><span id="month"></span>월 <span id="day"></span>일</a>
+                                    <button type="button" id="front" style="color: #5a5c69; text-decoration: none;">&gt;</button>
                             </div>
                             </div>
                             <div class="card shadow mb-4">
+                                <p>CANCEL</p>
                                 <div class="card-body" style="padding: 0 0 0 25px;">
                                     <div class="table-responsive">
                                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <tbody>
-                                                <tr>
+                                            <tbody id="itemList1">
+                                                <tr v-for="dto in itemList1">
                                                     <th style="border: none;">2</th>
-                                                    <td style="border: none;">홍길동</td>
-                                                    <td style="border: none;">2022-12-21 17시</td>
-                                                    <td style="border: none;">010-1111-1111</td>
-                                                    <td style="border: none;">취소 완료</td>
-                                                    <th style="border: none;">식당 측 문제로 취소</th>
+                                                    <td style="border: none;">{{dto.resName}}</td>
+                                                    <td style="border: none;">{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</td>
+                                                    <td style="border: none;">{{dto.visitHp}}</td>
+                                                    <td style="border: none;">{{dto.resStatus}}</td>
+                                                    <th style="border: none;">{{dto.resReason}}</th>
                                                 </tr>   
-                                            </tbody>                                  
-                                       </table>
+                                            </tbody>
+                                        </table>
                                        
                                     </div>
                                 </div>
                             </div>
+                    <div class="card shadow mb-4">
+                        <p>NOSHOW</p>
+                        <div class="card-body" style="padding: 0 0 0 25px;">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" width="100%" cellspacing="0">
+                                    <tbody id="itemList2">
+                                        <tr v-for="dto in itemList2">
+                                            <th style="border: none;">2</th>
+                                            <td style="border: none;">{{dto.resName}}</td>
+                                            <td style="border: none;">{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</td>
+                                            <td style="border: none;">{{dto.visitHp}}</td>
+                                            <td style="border: none;">{{dto.resStatus}}</td>
+                                            <th style="border: none;">{{dto.resReason}}</th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </div>
@@ -68,7 +89,6 @@
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -93,7 +113,111 @@
 <!--footer.html 시작-->
 <div th:replace="fragment/footer :: footer"></div>
 <!--footer.html 끝-->
+<script>
+    let date = new Date();
+    let month = ("00"+(date.getMonth()+1).toString()).slice(-2);
+    let day = ("00"+(date.getDate()).toString()).slice(-2);
+    let month1 = document.querySelector('#month');
+    let day1 = document.querySelector('#day');
+    month1.innerText = month;
+    day1.innerText = day;
 
+    const back = document.querySelector('#back');
+    const front = document.querySelector('#front');
+    back.addEventListener('click', minus);
+    front.addEventListener('click', plus);
+
+    function datelist(){
+        let month = ("00"+(date.getMonth()+1).toString()).slice(-2);
+        let day = ("00"+(date.getDate()).toString()).slice(-2);
+        month1.innerHTML = month;
+        day1.innerHTML = day;
+    }
+
+    function minus(){
+        date = new Date(date.setDate(date.getDate()-1));
+        datelist();
+        cancel();
+        noshow();
+    }
+    function plus(){
+        date = new Date(date.setDate(date.getDate()+1));
+        datelist();
+        cancel();
+        noshow();
+    }
+
+
+
+    const { createApp } = Vue
+    let itemList1 = createApp({
+        data() {
+            return {
+                itemList1: {},
+            }
+        }
+    }).mount('#itemList1');
+    let itemList2 = createApp({
+        data() {
+            return {
+                itemList2: {},
+            }
+        }
+    }).mount('#itemList2');
+    window.onload = function(){
+        cancel();
+        noshow();
+    }
+        function cancel(){
+        let data1 = {
+            resMonth : month1.innerText,
+            resDay : day1.innerText
+        }
+        $.ajax({
+            url: "/api/reservation/cancel",
+            type: "GET",
+            dataType: "json",
+            processData: true,
+            contentType: "application/json; charset=UTF-8",
+            data: data1,
+            success: function(result) {
+                if (result) {
+                    console.log("완료");
+                    itemList1.itemList1 = result.data;
+                } else {
+                    alert("전송된 값 없음");
+                }
+            },
+            error: function() {
+                alert("에러 발생");
+            }
+        })};
+        function noshow(){
+        let data1 = {
+            resMonth : month1.innerText,
+            resDay : day1.innerText
+        }
+        $.ajax({
+            url: "/api/reservation/noshow",
+            type: "GET",
+            dataType: "json",
+            processData: true,
+            contentType: "application/json; charset=UTF-8",
+            data: data1,
+            success: function(result) {
+                if (result) {
+                    console.log("완료");
+                    itemList2.itemList2 = result.data;
+                } else {
+                    alert("전송된 값 없음");
+                }
+            },
+            error: function() {
+                alert("에러 발생");
+            }
+        });
+    }
+</script>
 </body>
 
 </html>

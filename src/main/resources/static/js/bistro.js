@@ -5,19 +5,10 @@ window.onload = function(){
 }
 
 function sendit(){
-
-
-    const arr=[];
-    const convenience = document.getElementsByName("convenience");
-    for (let i = 0;i<convenience.length; i++){
-        if(convenience[i].checked==true){
-            arr.push(convenience[i].value);
-        }
-
-    }
-
-    const resaBisName = document.getElementById("resaBisName").innerText;
+    const resaBisName = document.getElementById("resaBisName");
+    console.log(resaBisName.value);
     const bisDesc = document.getElementById("bisDesc");
+    console.log(bisDesc.value);
     const bisCategory = document.getElementById("bisCategory");
     const bisRegion = document.getElementById("bisRegion");
     const bisLunch = document.getElementById("bisLunch");
@@ -61,13 +52,12 @@ function sendit(){
             "resultCode":"ok",
             "description":"정상",
             "data":{
-                "resaBisName":`${resaBisName}`,
+                "resaBisName":`${resaBisName.value}`,
                 "bisDesc":`${bisDesc.value}`,
                 "bisCategory":`${bisCategory.value}`,
                 "bisRegion":`${bisRegion.value}`,
                 "bisLunch":`${bisLunch.value}`,
                 "bisDinner":`${bisDinner.value}`,
-                "bisConvenience":`${arr}`
             }
         }),
     })

@@ -52,11 +52,10 @@ public class NoticeApiLogicService extends BaseService<NoticeApiRequest, NoticeA
     }
 
     @Override
-    public Header<NoticeApiResponse> read(Long id) {
-        return null;
+    public Header<NoticeApiResponse> read(Long idx) {
+        return baseRepository.findById(idx).map(menu -> response(menu))
+                .map(Header::OK).orElseGet(()->Header.ERROR("데이터 없음"));
     }
-
-
 
     @Override
     public Header<NoticeApiResponse> update(Header<NoticeApiRequest> request) {

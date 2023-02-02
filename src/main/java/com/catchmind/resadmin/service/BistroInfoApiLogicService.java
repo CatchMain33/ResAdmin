@@ -3,11 +3,16 @@ package com.catchmind.resadmin.service;
 
 import com.catchmind.resadmin.model.entity.BistroInfo;
 import com.catchmind.resadmin.model.network.Header;
+import com.catchmind.resadmin.model.network.request.BistroDetailApiRequest;
 import com.catchmind.resadmin.model.network.request.BistroInfoApiRequest;
 import com.catchmind.resadmin.model.network.response.BistroInfoApiResponse;
 import com.catchmind.resadmin.repository.BistroInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +30,6 @@ public class BistroInfoApiLogicService extends BaseService<BistroInfoApiRequest,
                 .bisRegion(bistroInfo.getBisRegion())
                 .bisLunch(bistroInfo.getBisLunch())
                 .bisDinner(bistroInfo.getBisDinner())
-                .bisConvenience(bistroInfo.getBisConvenience())
                 .regDate(bistroInfo.getRegDate())
                 .build();
         return bistroInfoApiResponse;
@@ -41,7 +45,6 @@ public class BistroInfoApiLogicService extends BaseService<BistroInfoApiRequest,
                 .bisRegion(bistroInfoApiRequest.getBisRegion())
                 .bisLunch(bistroInfoApiRequest.getBisLunch())
                 .bisDinner(bistroInfoApiRequest.getBisDinner())
-                .bisConvenience(bistroInfoApiRequest.getBisConvenience())
                 .build();
         BistroInfo newBistroInfo = baseRepository.save(bistroInfo);
         return Header.OK(response(newBistroInfo));
@@ -74,11 +77,28 @@ public class BistroInfoApiLogicService extends BaseService<BistroInfoApiRequest,
 //    }
     @Override
     public Header<BistroInfoApiResponse> update(Header<BistroInfoApiRequest> request) {
-        return null;
+        BistroInfoApiRequest bistroInfoApiRequest = request.getData();
+        Optional<BistroInfo> bistroInfo = bistroInfoRepository.findByResaBisName(bistroInfoApiRequest.getResaBisName());
+        System.out.println(bistroInfoApiRequest.getResaBisName());
+        System.out.println(bistroInfo);
+        return bistroInfo.map(
+                        user->{
+                            user.setBisDesc(bistroInfoApiRequest.getBisDesc());
+                            user.setBisCategory(bistroInfoApiRequest.getBisCategory());
+                            user.setBisRegion(bistroInfoApiRequest.getBisRegion());
+                            user.setBisLunch(bistroInfoApiRequest.getBisLunch());
+                            user.setBisDinner(bistroInfoApiRequest.getBisDinner());
+                            return user;
+                        }).map(user-> baseRepository.save(user))
+                .map(user->response(user))
+                .map(Header::OK)
+                .orElseGet(()->Header.ERROR("데이터 없음")
+                );
     }
 
 
     public Header<BistroInfoApiResponse> delete(Long id) {
        return null;
     }
+
 }

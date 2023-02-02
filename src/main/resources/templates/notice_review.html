@@ -21,40 +21,10 @@
 						</div>
 					</div>				
 					<div class="widget__content notice">
-						<h2 style="    padding-bottom: 10px; font-size: 22px;">[공지] 노쇼 삼진 아웃 제도 & 노쇼아웃 플러스 제도 안내</h2>
-						<p style="    color: #9a9a9a;">2022-12-21</p>
-						<p class="notice_content">안녕하세요.<br>
-						즐거운 미식 생활의 시작 캐치테이블입니다.</p>
-						<p class="notice_content">2022년 4월 15일부터 노쇼아웃 캠페인과 함께<br>
-						적극적으로 노쇼를 줄이기 위해 노쇼 삼진 아웃 제도, 노쇼아웃 플러스 두 가지 제도가 시행됩니다.</p>
-						<p class="notice_content">[ 노쇼 삼진 아웃 제도 ] <br>
-						- 캐치테이블 유저 전체 대상으로 노쇼 횟수에 따라 앱 예약 제한을 두는 제도<br>
-						- 페널티 :<br>
-						1회 노쇼 발생 시, 경고 (알림톡을 통해 안내 예정)<br>
-						2회 노쇼 발생 시, 1개월간 캐치테이블 앱 내 전체 레스토랑 예약 불가<br>
-						3회 노쇼 발생 시, 3개월간 캐치테이블 앱 내 전체 레스토랑 예약 불가<br>
-						- 기간 : 2022. 5. 1 - 2022. 12. 31<br>
-						</p>
-						<p class="notice_content">
-						* 탈퇴 후 재가입하더라도 노쇼 제재는 유지됩니다.<br>
-						* 전화 예약의 경우 제재의 대상이 되지 않습니다.<br>
-						* 노쇼 및 방문 이력은 마이다이닝/마이페이지에서 확인 가능하며, 기간 내 발생한 횟수만 대상이 됩니다.
-						</p>
-						<p class="notice_content">
-						[ 노쇼 아웃 플러스 ]<br>
-						- 전화 예약 노쇼 고객을 제한하기 위한 제도 (신청 레스토랑에 한해 적용)<br>
-						- 페널티 : 개별 레스토랑에서 노쇼 고객으로 등록 시, 기간 동안 앱에서 해당 레스토랑 예약 불가<br>
-						- 기간 : 2022. 4. 15 - 2022. 12. 31
-						</p>
-						<p class="notice_content">
-						* ’노쇼 아웃 플러스’ 를 희망하는 레스토랑은 캐치테이블 고객센터/채널톡을 통해 신청 가능합니다.<br>
-						* 대상 레스토랑은 앱 내 별도 표기되지 않으며, 노쇼 고객으로 등록된 분에 한해 예약 진행 시 제한 사항이 안내됩니다.
-						</p>
-						<p class="notice_content">
-						미식을 만드는 사람들과 즐기는 사람들 모두 오래 미식을 즐길 수 있도록, 건전한 예약 문화를 위해 앞장서는 캐치테이블이 되겠습니다.<br>
-						감사합니다.<br>
-						캐치테이블 드림<br>
-						</p>					
+						<h2 style="    padding-bottom: 10px; font-size: 22px;" th:text="${content.noTitle}"></h2>
+						<p style="    color: #9a9a9a;">[캐치테이블 관리자]</p>
+						<p style="    color: #9a9a9a;" th:text="${content.regDate.getYear()}+'-'+${content.regDate.getMonthValue()}+'-'+${content.regDate.getDayOfMonth()}"></p>
+						<p class="notice_content" th:text="${content.noContent}"></p>
 					</div>
 				</article>
 			</div>

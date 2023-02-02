@@ -2,7 +2,6 @@ function tabby(id){
 			var t = id.substr(id.length - 1);
 			var tActiveHeight = $('.tabs__content--' + t).height();
 			$('.tabs__content').height(tActiveHeight);
-			console.log(id);
 		}
 
 		$(document).ready(function(){

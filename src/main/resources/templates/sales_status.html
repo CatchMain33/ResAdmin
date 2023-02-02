@@ -3,6 +3,7 @@
 <html lang="en">
 <!-- head.html -->
 <div th:replace="fragment/head :: head"></div>
+<script src="https://unpkg.com/vue@3"></script>
 <!-- head.html 끝 -->
 <body>
 <!-- header.html -->
@@ -40,9 +41,9 @@
 						font-size: 22px;
 						font-weight: bold;
 						color: #5a5c69;">
-						<a href="" style="color: #5a5c69; text-decoration: none;">&lt;</a> 
-						<a href="/reservationCalender" style="color: #5a5c69; text-decoration: none;">12월 15일</a>
-						<a href="" style="color: #5a5c69; text-decoration: none;">&gt;</a>
+                            <button type="button" id="back" style="color: #5a5c69; text-decoration: none;">&lt;</button>
+						    <a href="/reservationCalender" style="color: #5a5c69; text-decoration: none;"><span id="month"></span>월 <span id="day"></span>일</a>
+                            <button type="button" id="front" style="color: #5a5c69; text-decoration: none;">&gt;</button>
 					</div>
 					
 					<div class="row">
@@ -119,10 +120,10 @@
                                                             </div>
                                                         </th>
                                                         <td>
-                                                            <strong class="underline txtWarn">0</strong></a> 건                                            
+                                                            <strong class="underline txtWarn daytotreserve"></strong></a> 건
                                                         </td>
                                                         <td>
-                                                            <strong class="underline txtEm">0</strong>
+                                                            <strong class="underline txtEm monthtotreserve"></strong>
                                                             <a> 건                                         
                                                             
                                                         </td>
@@ -144,11 +145,11 @@
                                                         </div>
                                                     </th>
                                                     <td>
-                                                        <strong class="underline txtWarn">0</strong></a> 원                                            
+                                                        <strong class="underline txtWarn daytotmoney"></strong></a> 원
                                                        
                                                     </td>
                                                     <td>
-                                                        <strong class="underline txtEm">0</strong></a> 원                    
+                                                        <strong class="underline txtEm monthtotmoney"></strong></a> 원
                                                                        
                                                     </td>
                                                     <!-- <td class="center">
@@ -167,11 +168,11 @@
                                                         </div>
                                                     </th>
                                                     <td>
-                                                        <strong class="underline txtWarn">0</strong></a>원                                  
+                                                        <strong class="underline txtWarn daytotrefund"></strong></a>원
                                                        
                                                     </td>
                                                     <td>
-                                                        <strong class="underline txtEm">0</strong></a> 원                                 
+                                                        <strong class="underline txtEm monthtotrefund"></strong></a> 원
                                                     </td>
                                                     <!-- <td class="center">
                                                         <a href="#" class="btnNormal" data-gtm="TODO_Realtime_order_check"><span>환불조회</span></a>
@@ -191,11 +192,241 @@
 			</div> <!-- /row -->
 
 	</section> <!-- /content -->
-
 </div> <!-- /wrapper -->
 <!--footer.html 시작-->
 <div th:replace="fragment/footer :: footer"></div>
 <!--footer.html 끝-->
 
 </body>
+<script>
+    let date = new Date();
+    let month = ("00"+(date.getMonth()+1).toString()).slice(-2);
+    let day = ("00"+(date.getDate()).toString()).slice(-2);
+    let month1 = document.querySelector('#month');
+    let day1 = document.querySelector('#day');
+    month1.innerText = month;
+    day1.innerText = day;
+    let dayReservecom;
+    let dayReserveplan;
+    let dayReservecancel;
+    let monthReservecom;
+    let monthReserveplan;
+    let monthReservecancel;
+    let totreserveday = document.querySelector(".daytotreserve")
+    let totmoenyday = document.querySelector(".daytotmoney")
+    let totrefundday = document.querySelector(".daytotrefund")
+    let totreservemonth = document.querySelector(".monthtotreserve")
+    let totmoneymonth = document.querySelector(".monthtotmoney")
+    let totrefundmonth = document.querySelector(".monthtotrefund")
+
+
+    const back = document.querySelector('#back');
+    const front = document.querySelector('#front');
+    back.addEventListener('click', minus);
+    front.addEventListener('click', plus);
+
+    function datelist(){
+        let month = ("00"+(date.getMonth()+1).toString()).slice(-2);
+        let day = ("00"+(date.getDate()).toString()).slice(-2);
+        month1.innerText = month;
+        day1.innerText = day;
+        console.log(month1.innerText)
+        console.log(day1.innerText)
+    }
+    function minus(){
+        date = new Date(date.setDate(date.getDate()-1));
+        datelist();
+        total();
+    }
+    function plus(){
+        date = new Date(date.setDate(date.getDate()+1));
+        datelist();
+        total();
+    }
+    function month11(){
+        let data1 = {
+            resMonth : month1.innerText}
+        $.ajax({
+            url: "/api/reservation/monthcom",
+            type: "GET",
+            async:false,
+            dataType: "json",
+            processData: true,
+            contentType: "application/json; charset=UTF-8",
+            data: data1,
+            success: function(result) {
+                if (result) {
+                    dayReservecom = Object.keys(result.data).length;
+                    console.log("달별 방문완료 건수 : "+dayReservecom);
+                    return dayReservecom;
+                } else {
+                    alert("전송된 값 없음");
+                }
+            },
+            error: function() {
+                alert("에러 발생");
+            }
+        });
+    }
+    function month12(){
+        let data1 = {
+            resMonth : month1.innerText}
+        $.ajax({
+            url: "/api/reservation/monthplan",
+            type: "GET",
+            async:false,
+            dataType: "json",
+            processData: true,
+            contentType: "application/json; charset=UTF-8",
+            data: data1,
+            success: function(result) {
+                if (result) {
+                    dayReserveplan = Object.keys(result.data).length;
+                    console.log("달별 방문예약건수 : "+dayReserveplan);
+                    return dayReserveplan;
+                } else {
+                    alert("전송된 값 없음");
+                }
+            },
+            error: function() {
+                alert("에러 발생");
+            }
+        });
+    }
+    function month13(){
+        let data1 = {
+            resMonth : month1.innerText}
+        $.ajax({
+            url: "/api/reservation/monthcancel",
+            type: "GET",
+            async:false,
+            dataType: "json",
+            processData: true,
+            contentType: "application/json; charset=UTF-8",
+            data: data1,
+            success: function(result) {
+                if (result) {
+                    dayReservecancel = Object.keys(result.data).length;
+                    console.log("달별 취소건수 : "+dayReservecancel);
+                    return dayReservecancel;
+                } else {
+                    alert("전송된 값 없음");
+                }
+            },
+            error: function() {
+                alert("에러 발생");
+            }
+        });
+    }
+    function monthday1(){
+        let data1 = {
+            resMonth : month1.innerText,
+            resDay : day1.innerText}
+        console.log(month1.innerText)
+        console.log(day1.innerText)
+        $.ajax({
+            url: "/api/reservation/daycom",
+            type: "GET",
+            async:false,
+            dataType: "json",
+            processData: true,
+            contentType: "application/json; charset=UTF-8",
+            data: data1,
+            success: function(result) {
+                if (result) {
+                    monthReservecom = Object.keys(result.data).length;
+                    console.log("일별 방문완료 건수 : "+monthReservecom);
+                    return monthReservecom;
+                } else {
+                    alert("전송된 값 없음");
+                }
+            },
+            error: function() {
+                alert("에러 발생");
+            }
+        });
+    }
+    function monthday2(){
+        let data1 = {
+            resMonth : month1.innerText,
+            resDay : day1.innerText}
+        $.ajax({
+            url: "/api/reservation/dayplan",
+            type: "GET",
+            async:false,
+            dataType: "json",
+            processData: true,
+            contentType: "application/json; charset=UTF-8",
+            data: data1,
+            success: function(result) {
+                if (result) {
+                    monthReserveplan = Object.keys(result.data).length;
+                    console.log("일별 방문예정 건수 : "+monthReserveplan);
+                    return monthReserveplan;
+                } else {
+                    alert("전송된 값 없음");
+                }
+            },
+            error: function() {
+                alert("에러 발생");
+            }
+        });
+    }
+    function monthday3(){
+        let data1 = {
+            resMonth : month1.innerText,
+            resDay : day1.innerText}
+        $.ajax({
+            url: "/api/reservation/daycancel",
+            type: "GET",
+            async:false,
+            dataType: "json",
+            processData: true,
+            contentType: "application/json; charset=UTF-8",
+            data: data1,
+            success: function(result) {
+                if (result) {
+                    monthReservecancel = Object.keys(result.data).length;
+                    console.log("일별 취소건수 : "+monthReservecancel);
+                    return monthReservecancel;
+                } else {
+                    alert("전송된 값 없음");
+                }
+            },
+            error: function() {
+                alert("에러 발생");
+            }
+        });
+    }
+
+    function allreserve1(){
+            monthday1()
+            monthday3()
+            monthday2()
+            month11()
+            month12()
+            month13()
+    }
+    function printint(){
+        totreservemonth.innerText = parseInt(dayReservecom)+parseInt(dayReserveplan);
+        totmoneymonth.innerText = (parseInt(dayReservecom)+parseInt(dayReserveplan))*50000;
+        totrefundmonth.innerText = parseInt(dayReservecancel)*50000;
+        totreserveday.innerText = parseInt(monthReservecom)+parseInt(monthReserveplan);
+        totmoenyday.innerText = (parseInt(monthReserveplan)+parseInt(monthReservecom))*50000;
+        totrefundday.innerText = parseInt(monthReservecancel)*50000;
+        // console.log(dayReservecom);
+        // console.log(dayReserveplan);
+        // console.log(dayReservecancel);
+        // console.log(monthReservecom);
+        // console.log(monthReserveplan);
+        // console.log(monthReservecancel);
+    }
+    function total(){
+        allreserve1()
+        printint()
+    }
+    datelist();
+    total()
+</script>
+<script src="js/chart-area.js"></script>
 </html>

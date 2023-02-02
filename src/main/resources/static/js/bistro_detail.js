@@ -4,7 +4,7 @@ window.onload = function(){
 }
 
 function sendit(){
-
+    const resaBisName = document.getElementById("resaBisName");
     const bdNotice = document.getElementById("bdNotice");
     const bdPark = document.getElementById("bdPark");
     const bdAddr = document.getElementById("bdAddr");
@@ -27,7 +27,7 @@ function sendit(){
         return false;
     }
 
-    fetch('http://localhost:8888/api/admin2', {
+    fetch('http://localhost:9999/api/admin2', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -35,6 +35,7 @@ function sendit(){
             "resultCode":"ok",
             "description":"정상",
             "data":{
+                "resaBisName":`${resaBisName.value}`,
                 "bdNotice":`${bdNotice.value}`,
                 "bdPark":`${bdPark.value}`,
                 "bdAddr":`${bdAddr.value}`,
