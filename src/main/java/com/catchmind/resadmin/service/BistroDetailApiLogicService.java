@@ -2,13 +2,17 @@ package com.catchmind.resadmin.service;
 
 
 import com.catchmind.resadmin.model.entity.BistroDetail;
+import com.catchmind.resadmin.model.entity.BistroInfo;
 import com.catchmind.resadmin.model.network.Header;
 import com.catchmind.resadmin.model.network.request.BistroDetailApiRequest;
+import com.catchmind.resadmin.model.network.request.BistroInfoApiRequest;
 import com.catchmind.resadmin.model.network.response.BistroDetailApiResponse;
 import com.catchmind.resadmin.repository.BistroDetailRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +33,6 @@ public class BistroDetailApiLogicService extends BaseService<BistroDetailApiRequ
                 .bdHour(bistroDetail.getBdHour())
                 .bdHoliday(bistroDetail.getBdHoliday())
                 .bdHomepage(bistroDetail.getBdHomepage())
-                .bdIdx2(Math.toIntExact(bistroDetail.getBdIdx2()))
-                .regDate(bistroDetail.getRegDate())
                 .build();
         return bistroDetailApiResponse;
     }
@@ -81,7 +83,27 @@ public class BistroDetailApiLogicService extends BaseService<BistroDetailApiRequ
 //    }
     @Override
     public Header<BistroDetailApiResponse> update(Header<BistroDetailApiRequest> request) {
-        return null;
+        BistroDetailApiRequest bistroDetailApiRequest = request.getData();
+        Optional<BistroDetail> bistroDetail = bistroDetailRepository.findByResaBisName(bistroDetailApiRequest.getResaBisName());
+        System.out.println(bistroDetailApiRequest.getResaBisName());
+        System.out.println(bistroDetail);
+        return bistroDetail.map(
+                        user->{
+                            user.setBdNotice(bistroDetailApiRequest.getBdNotice());
+                            user.setBdPark(bistroDetailApiRequest.getBdPark());
+                            user.setBdAddr(bistroDetailApiRequest.getBdAddr());
+                            user.setBdHp(bistroDetailApiRequest.getBdHp());
+                            user.setBdIntro(bistroDetailApiRequest.getBdIntro());
+                            user.setBdCaution(bistroDetailApiRequest.getBdCaution());
+                            user.setBdHour(bistroDetailApiRequest.getBdHour());
+                            user.setBdHoliday(bistroDetailApiRequest.getBdHoliday());
+                            user.setBdHomepage(bistroDetailApiRequest.getBdHomepage());
+                            return user;
+                        }).map(user-> baseRepository.save(user))
+                .map(user->response(user))
+                .map(Header::OK)
+                .orElseGet(()->Header.ERROR("데이터 없음")
+                );
     }
 
 

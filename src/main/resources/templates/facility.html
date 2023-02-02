@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<!-- head.html -->
+<div th:replace="fragment/head :: head"></div>
+<!-- head.html 끝 -->
+<body>
+<!-- header.html -->
+<div th:replace="fragment/header :: header"></div>
+<!-- header.html 끝-->
+<div class="wrapper">
+  <!-- aside.html 시작 -->
+  <div th:replace="fragment/aside :: aside"></div>
+  <!-- aside.html 끝 -->
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <article class="widget">
+          <header class="widget__header">
+            <h3 class="widget__title" style="font-size: 21px;
+                        font-weight: bold;">식당 정원 및 테이블 등록</h3>
+          </header>
+                  <div>
+                    <p>
+                      주차가능 여부 :
+                      <select id="parking">
+                        <option value="1">가능</option>
+                        <option value="0">불가능</option>
+                      </select>
+                      현재 상태 :
+                      <span th:if="${fac.facParking==true}">가능</span>
+                      <span th:if="${fac.facParking==false}">불가능</span>
+                    </p>
+                    <p>
+                      발렛가능 여부 :
+                      <select id="valet">
+                        <option value="1">가능</option>
+                        <option value="0">불가능</option>
+                      </select>
+                      현재 상태 :
+                      <span th:if="${fac.facValet==true}">가능</span>
+                      <span th:if="${fac.facValet==false}">불가능</span>
+                    </p>
+                    <p>
+                      콜키지 가능 여부 :
+                      <select id="corkage">
+                        <option value="1">가능</option>
+                        <option value="0">불가능</option>
+                      </select>
+                      현재 상태 :
+                      <span th:if="${fac.facCorkage==true}">가능</span>
+                      <span th:if="${fac.facCorkage==false}">불가능</span>
+                    </p>
+                    <p>
+                      노키즈존 :
+                      <select id="nokid">
+                        <option value="1">가능</option>
+                        <option value="0">불가능</option>
+                      </select>
+                      현재 상태 :
+                      <span th:if="${fac.facNokid==true}">가능</span>
+                      <span th:if="${fac.facNokid==false}">불가능</span>
+                    </p>
+                    <p>
+                      반려동물동반 가능 여부 :
+                      <select id="animal">
+                        <option value="1">가능</option>
+                        <option value="0">불가능</option>
+                      </select>
+                      현재 상태 :
+                      <span th:if="${fac.facAnimal==true}">가능</span>
+                      <span th:if="${fac.facAnimal==false}">불가능</span>
+                    </p>
+                    <p>
+                      장애인 편의시설 유무 :
+                      <select id="handi">
+                        <option value="1">가능</option>
+                        <option value="0">불가능</option>
+                      </select>
+                      현재 상태 :
+                      <span th:if="${fac.facHandi==true}">가능</span>
+                      <span th:if="${fac.facHandi==false}">불가능</span>
+                    </p>
+                    <div>
+                      <button id="bdBtn" class="btn btn-skyblue" type="submit">
+                        보내기
+                      </button>
+                    </div>
+          </article>
+      </div>
+    </div>
+  </section> <!-- /content -->
+</div> <!-- /wrapper -->
+<!--footer.html 시작-->
+<div th:replace="fragment/footer :: footer"></div>
+<!--footer.html 끝-->
+<script src="/js/facility.js"></script>
+</body>
+</html>

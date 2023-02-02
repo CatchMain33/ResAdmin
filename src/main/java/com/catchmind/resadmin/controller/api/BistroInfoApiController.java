@@ -20,7 +20,6 @@ public class BistroInfoApiController extends CrudController<BistroInfoApiRequest
     private final BistroInfoApiLogicService bistroInfoApiLogicService;
 
     @Override
-    @PostMapping("")
     public Header<BistroInfoApiResponse> create(@RequestBody Header<BistroInfoApiRequest> request) {
         return bistroInfoApiLogicService.create(request);
     }
@@ -36,8 +35,9 @@ public class BistroInfoApiController extends CrudController<BistroInfoApiRequest
     }
 
     @Override
-    public Header<BistroInfoApiResponse> update(Header<BistroInfoApiRequest> request) {
-        return super.update(request);
+    @PostMapping("")
+    public Header<BistroInfoApiResponse> update(@RequestBody Header<BistroInfoApiRequest> request) {
+        return bistroInfoApiLogicService.update(request);
     }
 
     @Override

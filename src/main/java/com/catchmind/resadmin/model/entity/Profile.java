@@ -32,6 +32,5 @@ public class Profile extends BaseEntity2 implements Auditable2 {
     private int prReview;
     private int prNoshow;
     private boolean prBlock;
-
-
+    private String role;
 }

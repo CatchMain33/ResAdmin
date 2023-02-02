@@ -66,21 +66,60 @@ public class LoginPageController {
     // 비밀번호 찾기
     // http://localhost:8888/passwordChange
     @GetMapping(path = "passwordChange")
-    public ModelAndView passwordChange(){
+    public ModelAndView passwordChange(HttpServletRequest request){
+        HttpSession session =request.getSession(false);
+        String id = null;
+        String name = null;
+
+        if(session == null){
+            System.out.println("세션이 없습니다.");
+            return new ModelAndView("/login");
+
+        }else{
+            id = (String)session.getAttribute("id");
+            name = (String)session.getAttribute("name");
+            System.out.println("세션이 있습니다.");
+        }
         return new ModelAndView("/password_change");
     }
 
     // 초기값 비밀번호 변경 페이지
     // http://localhost:8888/rePassword
     @GetMapping(path = "rePassword")
-    public ModelAndView rePassword(){
+    public ModelAndView rePassword(HttpServletRequest request){
+        HttpSession session =request.getSession(false);
+        String id = null;
+        String name = null;
+
+        if(session == null){
+            System.out.println("세션이 없습니다.");
+            return new ModelAndView("/login");
+
+        }else{
+            id = (String)session.getAttribute("id");
+            name = (String)session.getAttribute("name");
+            System.out.println("세션이 있습니다.");
+        }
         return new ModelAndView("/re_password");
     }
 
     // 비밀번호 수정 페이지
     // http://localhost:8888/myModify
     @GetMapping(path = "myModify")
-    public ModelAndView myModify(){
+    public ModelAndView myModify(HttpServletRequest request){
+        HttpSession session =request.getSession(false);
+        String id = null;
+        String name = null;
+
+        if(session == null){
+            System.out.println("세션이 없습니다.");
+            return new ModelAndView("/login");
+
+        }else{
+            id = (String)session.getAttribute("id");
+            name = (String)session.getAttribute("name");
+            System.out.println("세션이 있습니다.");
+        }
         return new ModelAndView("/my_modify");
     }
 

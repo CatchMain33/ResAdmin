@@ -33,6 +33,10 @@
   text-align: center;
   color: white;
 }
+
+.white{
+  color: white;
+}
 .btn:active {
   top: 4px; 
 }

@@ -94,4 +94,19 @@ public class ResAdminApiLogicService extends BaseService<ResAdminApiRequest, Res
     }
 
 
+    public Header<ResAdminApiResponse> updatepw(Header<ResAdminApiRequest> request) {
+        ResAdminApiRequest resAdminApiRequest = request.getData();
+        Optional<ResAdmin> resAdmin = resAdminRepository.findByResaUserpw(resAdminApiRequest.getResaUserpw());
+        System.out.println(resAdmin);
+        return resAdmin.map(
+                        user->{
+                            user.setResaUserpw(resAdminApiRequest.getResaUserpw());
+                            return user;
+                        }).map(user-> baseRepository.save(user))
+                .map(user->response(user))
+                .map(Header::OK)
+                .orElseGet(()->Header.ERROR("데이터 없음")
+                );
+    }
+
 }

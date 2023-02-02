@@ -34,6 +34,11 @@ public class ResAdminApiController extends CrudController<ResAdminApiRequest, Re
         return resAdminApiLogicService.update(request);
     }
 
+    @PostMapping("/pw")
+    public Header<ResAdminApiResponse> updatePw(@RequestBody Header<ResAdminApiRequest> request) {
+        return resAdminApiLogicService.updatepw(request);
+    }
+
     @Override
     public Header<ResAdminApiResponse> delete(Long id) {
         return super.delete(id);

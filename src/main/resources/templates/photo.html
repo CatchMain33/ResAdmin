@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<!-- head.html -->
+<div th:replace="fragment/head :: head"></div>
+<!-- head.html 끝 -->
+<body>
+<!-- header.html -->
+<div th:replace="fragment/header :: header"></div>
+<!-- header.html 끝-->
+<div class="wrapper">
+  <!-- aside.html 시작 -->
+  <div th:replace="fragment/aside :: aside"></div>
+  <!-- aside.html 끝 -->
+  <section class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <article class="widget">
+          <header class="widget__header">
+            <h3 class="widget__title" style="font-size: 21px;
+                        font-weight: bold;">식당사진 등록</h3>
+          </header>
+          <form action="api/photo/upload" method="post" enctype="multipart/form-data">
+            <div class="widget__content">
+              식당이름 : <input type="text" th:value="${name}" id="resaBisName" readonly style="border: none"/>
+              <h4>단일 파일 업로드</h4>
+              <input type="file" name="file">
+
+<!--              <h4>다중 파일 업로드</h4>-->
+<!--              <input type="file" multiple="multiple" name="files">-->
+
+              <a href="index.html"><input type="submit"/></a>
+          </form>
+        </article>
+      </div>
+    </div>
+  </section> <!-- /content -->
+</div> <!-- /wrapper -->
+<!--footer.html 시작-->
+<div th:replace="fragment/footer :: footer"></div>
+<!--footer.html 끝-->
+<script src="/js/bistro.js"></script>
+</body>
+</html>

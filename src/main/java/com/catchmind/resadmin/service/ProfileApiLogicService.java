@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -125,5 +126,18 @@ public class ProfileApiLogicService extends BaseService<ProfileApiRequest, Profi
                 .currentElements(profile.getNumberOfElements())
                 .build();
         return Header.OK(profileApiResponses, pagination);
+    }
+
+    public Header<ProfileApiResponse> updateNoshow(String prName){
+        Optional<Profile> profile = profileRepository.findByPrName(prName);
+        return profile.map(
+                        user->{
+                            user.setPrNoshow(user.getPrNoshow()+1);
+                            return user;
+                        }).map(user-> baseRepository.save(user))
+                .map(user->response(user))
+                .map(Header::OK)
+                .orElseGet(()->Header.ERROR("데이터 없음")
+        );
     }
 }

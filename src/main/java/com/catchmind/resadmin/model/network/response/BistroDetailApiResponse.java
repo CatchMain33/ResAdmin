@@ -22,7 +22,6 @@ public class BistroDetailApiResponse {
     private String bdHour;
     private String bdHoliday;
     private String bdHomepage;
-    private int bdIdx2;
-    private LocalDateTime regDate;
+    private String resaBisName;
 
 }

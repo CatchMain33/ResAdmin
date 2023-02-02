@@ -21,8 +21,7 @@
 					</header>
 					<form>
 						<div class="widget__content">
-							<span id="resaBisName" th:text="${name}"></span>
-							<!--							<input type="text" class="input-text" id="bisName" style="padding-left: 12px;"/>-->
+							<input type="text" th:value="${name}" id="resaBisName" readonly/>
 							<input type="text" class="input-text" id="bisDesc" placeholder="한줄 소개" style="padding-left: 12px;margin-top: 17px;"/>
 							<div class="dropdown" style="margin-bottom: 10px;">
 								<select name="one" class="dropdown-select" id="bisCategory" style="color: #6e6f79">
@@ -36,42 +35,13 @@
 									<option value="카페">카페</option>
 								</select>
 							</div>
-							<!--							<div class="dropdown">-->
-							<!--								<select name="one" class="dropdown-select" id="catCountry" style="color: #6e6f79">-->
-							<!--									<option value="국가별 카테고리">국가별 카테고리</option>-->
-							<!--									<option value="한정식">한식</option>-->
-							<!--									<option value="육류,고기요리">중식</option>-->
-							<!--									<option value="해물,생선요리">일식</option>-->
-							<!--									<option value="다이닝 바">이탈리아음식</option>-->
-							<!--									<option value="한우오마카세">프랑스음식</option>-->
-							<!--									<option value="스시오마카세">퓨전음식</option>-->
-							<!--									<option value="스시오마카세">아시아음식</option>-->
-
-							<!--								</select>-->
-							<!--							</div>-->
 							<input type="text" class="input-text" id="bisRegion" placeholder="지역"  style="    padding-left: 12px; margin-top: 10px;"/>
 							<input type="text" class="input-text" id="bisLunch" placeholder="점심 가격대"  style="    padding-left: 12px;"/>
 							<input type="text" class="input-text" id="bisDinner" placeholder="저녁 가격대"  style="    padding-left: 12px;"/>
-							<div style="padding: 9px 0px 12px 11px;border: 1px solid #e5e5e5;margin-bottom: 19px;">
-								<p>편의시설 선택 (중복 체크 가능)</p>
-								<div style="margin-left: 15px;font-size: 13px;">
-									<input id="parking" name="convenience" type="checkbox" value="주차 가능">	<label for="parking">주차 가능</label><br>
-									<input id="valet" name="convenience" type="checkbox" value="발렛 가능"> <label for="valet">발렛 가능</label><br>
-									<input id="corkageFree" name="convenience" type="checkbox" value="콜키지 프리"> <label for="corkageFree">콜키지 프리</label><br>
-									<input id="corkageAble" name="convenience" type="checkbox" value="콜키지 가능"> <label for="corkageAble">콜키지 가능</label><br>
-									<input id="welcomKiz" name="convenienc	e" type="checkbox" value="웰컴키즈존"> <label for="welcomKiz">웰컴키즈존</label><br>
-									<input id="lettering" name="convenience" type="checkbox" value="레터링"> <label for="lettering">레터링</label><br>
-									<input id="lent" name="convenience" type="checkbox" value="대관 가능"> <label for="lent">대관 가능</label><br>
-									<input id="noKiz" name="convenience" type="checkbox" value="노키즈존"> <label for="noKiz">노키즈존</label><br>
-									<input id="sommelier" name="convenience" type="checkbox" value="전문 소믈리에"> <label for="sommelier">전문 소믈리에</label><br>
-									<input id="disabContent" name="convenience" type="checkbox" value="장애인 편의시설"> <label for="disabContent">장애인 편의시설</label><br>
-									<input id="pet" name="convenience" type="checkbox" value="반려동물 동반"> <label for="pet">반려동물 동반</label>
-								</div>
-							</div>
 							<!--						<textarea class="textarea" rows="6" placeholder="식당 소개" style="padding-left: 12px;"></textarea>-->
 							<div style="width: 100%;">
 								<div style="text-align: right;">
-									<a href="/myModify" class="btn cyan small" style="margin: 0;color: white">비밀번호 변경</a>
+									<a href="/re_password" class="btn cyan small" style="margin: 0;color: white">비밀번호 변경</a>
 									<a id="bisBtn" class="btn red small" style="margin: 0;color: white">저장하기</a>
 								</div>
 							</div>

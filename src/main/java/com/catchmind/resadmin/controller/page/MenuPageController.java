@@ -42,7 +42,20 @@ public class MenuPageController {
     // 메뉴 관리 페이지
     // http://localhost:8888/menuLookUp
     @GetMapping(path = "menuLookUp")
-    public ModelAndView menuLookUp(){
+    public ModelAndView menuLookUp(HttpServletRequest request){
+        HttpSession session =request.getSession(false);
+        String id = null;
+        String name = null;
+
+        if(session == null){
+            System.out.println("세션이 없습니다.");
+            return new ModelAndView("/login");
+
+        }else{
+            id = (String)session.getAttribute("id");
+            name = (String)session.getAttribute("name");
+            System.out.println("세션이 있습니다.");
+        }
         return new ModelAndView("/menuLookUp");
     }
 

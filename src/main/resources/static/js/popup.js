@@ -1,15 +1,39 @@
 const wrap = document.querySelector(".popup");
 const header = document.querySelector(".header");
-const button = document.getElementById("open");
+// const button = document.getElementById("open");
+let button11 = document.querySelectorAll(".open11");
 const close = document.querySelector('.close-icon');
 
-button.addEventListener('click', function(e) {
-    wrap.style.display = 'block';
-})
+console.log(button11)
 
-close.addEventListener('click', function(e) {
-    wrap.style.display='none';
-})
+// button.addEventListener('click', function(e) {
+//     wrap.style.display = 'block';
+// });
+
+const openModal = () => {
+  // modal의 hidden클래스를 지워줌으로서 display:none효과가 없어지면서 모달이 나타남
+  wrap.classList.remove("hidden1")
+  console.log('open modal')
+};
+// 모달을 꺼주는 함수
+const closeModal = () =>{
+  // modal에 hidden클래스를 추가해줌으로서 display:none효과가 적용되어 모달이 사라짐
+  wrap.classList.add("hidden1")
+  // 드래그로 옮겨진 모달을 원래 위치로 복귀시킴
+  // (만약 modal__contents의 top left값이 바뀐다면 밑에 wrap.style.top의 값과 wrap.style.left를 바꿔줘야한다)
+  // wrap.style.top = `100px`;
+  // wrap.style.left = `700px`;
+
+}
+// foreach문으로 openButton배열에 담긴 모든 버튼을 모두 선택 할 수있게 해줌
+// [].forEach.call(openBtns, function(col) {
+//     col.addEventListener("click", openModal);
+// });
+[].forEach.call(button11, function(col) {
+  col.addEventListener("click", openModal);
+});
+// closeBtn을 누르면 모달을 닫아줌
+close.addEventListener("click", closeModal);
 
 
 let lastX = 0;

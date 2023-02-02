@@ -19,7 +19,6 @@ public class BistroInfoApiResponse {
     private String bisRegion;
     private String bisLunch;
     private String bisDinner;
-    private String bisConvenience;
     private LocalDateTime regDate;
 
 }

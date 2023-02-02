@@ -13,9 +13,8 @@ import javax.persistence.*;
 @Data
 @Builder
 @ToString(callSuper = true)     //
-@EqualsAndHashCode(callSuper = true)    //
 @EntityListeners(AuditingEntityListener.class)
-public class BistroDetail extends BaseEntity implements Auditable {
+public class BistroDetail{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bdIdx;
@@ -28,5 +27,5 @@ public class BistroDetail extends BaseEntity implements Auditable {
     private String bdHour;
     private String bdHoliday;
     private String bdHomepage;
-    private Long bdIdx2;
+    private String resaBisName;
 }
