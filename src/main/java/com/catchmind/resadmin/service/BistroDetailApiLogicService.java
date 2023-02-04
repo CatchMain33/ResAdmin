@@ -32,7 +32,7 @@ public class BistroDetailApiLogicService extends BaseService<BistroDetailApiRequ
                 .bdCaution(bistroDetail.getBdCaution())
                 .bdHour(bistroDetail.getBdHour())
                 .bdHoliday(bistroDetail.getBdHoliday())
-                .bdHomepage(bistroDetail.getBdHomepage())
+                .bdHome(bistroDetail.getBdHome())
                 .build();
         return bistroDetailApiResponse;
     }
@@ -50,7 +50,7 @@ public class BistroDetailApiLogicService extends BaseService<BistroDetailApiRequ
                 .bdCaution(bistroDetailApiRequest.getBdCaution())
                 .bdHour(bistroDetailApiRequest.getBdHour())
                 .bdHoliday(bistroDetailApiRequest.getBdHoliday())
-                .bdHomepage(bistroDetailApiRequest.getBdHomepage())
+                .bdHome(bistroDetailApiRequest.getBdHome())
                 .build();
         BistroDetail newBistroDetail = baseRepository.save(bistroDetail);
         return Header.OK(response(newBistroDetail));
@@ -97,7 +97,7 @@ public class BistroDetailApiLogicService extends BaseService<BistroDetailApiRequ
                             user.setBdCaution(bistroDetailApiRequest.getBdCaution());
                             user.setBdHour(bistroDetailApiRequest.getBdHour());
                             user.setBdHoliday(bistroDetailApiRequest.getBdHoliday());
-                            user.setBdHomepage(bistroDetailApiRequest.getBdHomepage());
+                            user.setBdHome(bistroDetailApiRequest.getBdHome());
                             return user;
                         }).map(user-> baseRepository.save(user))
                 .map(user->response(user))

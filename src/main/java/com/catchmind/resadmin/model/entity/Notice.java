@@ -20,8 +20,6 @@ public class Notice extends BaseEntity2 implements Auditable2 {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long noIdx;
     private String noTitle;
-    private String adName;
-    private String adUserid;
     private String noContent;
 
 }

@@ -24,8 +24,6 @@ public class NoticeApiLogicService extends BaseService<NoticeApiRequest, NoticeA
         NoticeApiResponse noticeApiResponse = NoticeApiResponse.builder()
                 .noIdx(notice.getNoIdx())
                 .noTitle(notice.getNoTitle())
-                .adName(notice.getAdName())
-                .adUserid(notice.getAdUserid())
                 .noContent(notice.getNoContent())
                 .regDate(notice.getRegDate())
                 .updateDate(notice.getUpdateDate())
