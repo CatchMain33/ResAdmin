@@ -15,7 +15,7 @@ public class ReserveApiResponse {
     private Long resIdx;
     private String resaBisName;
     private int prIdx;
-    private String resName;
+    private String prName;
     private String resHp;
     private String resRequest;
     private String visitName;

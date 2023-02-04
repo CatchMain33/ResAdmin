@@ -21,7 +21,7 @@ public class Reserve extends BaseEntity2 implements Auditable2 {
     private Long resIdx;
     private String resaBisName;
     private int prIdx;
-    private String resName;
+    private String prName;
     private String resHp;
     private String resRequest;
     private String visitName;

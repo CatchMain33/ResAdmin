@@ -23,7 +23,7 @@ public class ReserveApiLogicService extends BaseService<ReserveApiRequest, Reser
                 .resaBisName(reserve.getResaBisName()).resIdx(reserve.getResIdx())
                 .prIdx(reserve.getPrIdx()).visitHp(reserve.getVisitHp()).visitName(reserve.getVisitName())
                 .resPerson(reserve.getResPerson()).resRequest(reserve.getResRequest())
-                .resTime(reserve.getResTime()).updateDate(reserve.getUpdateDate()).resName(reserve.getResName())
+                .resTime(reserve.getResTime()).updateDate(reserve.getUpdateDate()).prName(reserve.getPrName())
                 .resHp(reserve.getResHp()).resStatus(reserve.getResStatus()).resReason(reserve.getResReason()).build();
         return reserveApiResponse;
     }

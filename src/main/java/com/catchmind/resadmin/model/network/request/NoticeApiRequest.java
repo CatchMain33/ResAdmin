@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class NoticeApiRequest {  // 프론트 > 백
     private String noTitle;
-    private String adName;
-    private String adUserid;
     private String noContent;
 
 }
