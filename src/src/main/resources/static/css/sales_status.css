@@ -1,0 +1,313 @@
+#content {
+    min-height: 750px;
+    min-width: 960px;
+    padding: 24px 24px 100px;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+
+#wrap.beta .dashMain {
+    margin-left: 0;
+}
+
+
+.dashMain {
+    width: 1028px;
+    margin: 30px 0 0 -12px;
+}
+
+
+
+div {
+    display: block;
+}
+
+body, code {
+    font-size: 12px;
+    font-family: "돋움",dotum,"맑은 고딕","malgun gothic",helvetica,"Apple SD Gothic Neo",sans-serif;
+    /* color: #1b1e26; */
+    -webkit-text-size-adjust: none;
+    background-color: #f4f5f8;
+}
+
+
+.mDashSearch.typeCondition {
+    padding: 8px 16px;
+}
+
+.mDashPannel {
+    margin: 0 0 45px;
+}
+
+.mDashPannel tbody th[scope*='row'] {
+    padding: 13px 10px;
+    border-right: 1px solid #d9dadc;
+    border-bottom: 1px solid #d9dadc;
+    border-left: 1px solid #d9dadc;
+
+    font-weight: normal;
+    font-size: 12px;
+    color: #1c1c1c;
+    text-align: left;
+    background: #f5f3f4;
+}
+
+.mDashPannel thead tr th:first-child {
+    border-left: 1px solid #cdcdcd;
+}
+.mDashPannel thead th, .mDashPannel tbody th[scope*='col'] {
+    padding: 11px 10px 8px;
+    border-right: 1px solid #cdcdcd;
+    border-bottom: 1px solid #cdcdcd;
+    font-size: 12px;
+    color: #354c84;
+    background: #e4e7f1;
+}
+td {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+th, td {
+    border: 0;
+    word-wrap: break-word;
+}
+
+
+.mDashPannel .header {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -webkit-align-items: stretch;
+    -ms-align-items: stretch;
+    align-items: stretch;
+    width: 100%;
+    padding: 0 8px 0 0;
+    border: 1px solid #7a9fd1;
+    color: #fff;
+    box-sizing: border-box;
+    background: #87afe3;
+}
+
+.mDashPannel .header > .title {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    float: left;
+    padding: 10px 10px 8px;
+}
+
+.mDashPannel .header > .title h2 {
+    display: inline-block;
+    font-size: 12px;
+    vertical-align: top;
+}
+
+
+.mDashPannel .header > .title .cTip {
+    vertical-align: middle;
+}
+.cTip {
+    display: inline-block;
+}
+
+
+.mDashPannel .header:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.mDashPannel .center {
+    padding: 13px 15px 13px 30px;
+}
+
+.mDashPannel td {
+    padding: 13px 22px;
+}
+
+.mDashPannel td {
+    border-right: 1px solid #d9dadc;
+    border-bottom: 1px solid #d9dadc;
+    font-size: 12px;
+    color: #1c1c1c;
+    background: #fff;
+}
+.mNoticeEc th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    word-wrap: break-word;
+}
+
+
+
+/* 
+.mDashPannel td .txtWarn.underline {
+    border-bottom: 1px solid #f48f0e;
+} */
+.mDashPannel td .underline {
+    margin-bottom: 5px;
+    font-family: Verdana, sans-serif;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 1.25;
+    text-decoration: none;
+}
+
+.btnNormal span {
+    padding: 0 8px;
+    border: 1px solid #aeb4c6;
+    font-size: 12px;
+    line-height: 26px;
+    color: #1b1e26;
+    font-weight: normal;
+    background-color: #fff;
+}
+
+.btnNormal, .btnNormal span {
+    height: 28px;
+}
+[class^="btn"], [class^="btn"] span {
+    cursor: pointer;
+}
+.btnNormal span, .btnCtrl span, .btnDate span, .btnGeneral span, .btnStrong span, .btnSubmit span, .btnEm span, .btnSearch span {
+    vertical-align: top;
+}
+
+.btnNormal, .btnNormal span, .btnCtrl, .btnCtrl span, .btnDate, .btnDate span, .btnGeneral, .btnGeneral span, .btnStrong, .btnStrong span, .btnSubmit, .btnSubmit span, .btnEm, .btnEm span, .btnSearch, .btnSearch span, .btnToggle {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    white-space: nowrap;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+
+.mTooltip {
+    position: relative;
+    display: inline-block;
+    margin: -2px 0 0;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.mTooltip .content {
+    padding: 16px;
+}
+
+.mTooltip .tooltip {
+    display: none;
+    position: absolute;
+    left: -13px;
+    top: 30px;
+    text-align: left;
+    font-weight: normal;
+    letter-spacing: normal;
+    border: 1px solid #d6dae1;
+    background-color: #fff;
+    border-radius: 2px;
+}
+
+.mTooltip .icon {
+    overflow: hidden;
+    width: 14px;
+    height: 14px;
+    text-indent: 150%;
+    white-space: nowrap;
+    cursor: pointer;
+    background: url(//img.echosting.cafe24.com/ec/v2/sflex_tooltip.png) no-repeat -486px 0;
+}
+
+.mTooltip > button, .mTooltip > a {
+    display: block;
+}
+
+input, select, textarea, button {
+    font-size: 12px;
+    font-family: "돋움",dotum,"맑은 고딕","malgun gothic",helvetica,"Apple SD Gothic Neo",sans-serif;
+    color: #1b1e26;
+    vertical-align: middle;
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    text-indent: initial;
+}
+
+colgroup {
+    display: table-column-group;
+}
+
+button {
+    appearance: auto;
+    writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    line-height: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    box-sizing: border-box;
+    margin: 0em;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-image: initial;
+}
+
+
+button {
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+
+.mDashPannel .header .more {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -webkit-align-self: stretch;
+    -ms-align-self: stretch;
+    align-self: stretch;
+    position: relative;
+    float: right;
+    padding: 10px 0 8px 8px;
+    font-size: 11px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+
+.mDashPannel .header:after {
+    content: '';
+    display: block;
+    clear: both;
+}
