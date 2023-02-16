@@ -17,9 +17,11 @@ public interface ReserveRepository extends JpaRepository<Reserve,Long> {
 
     List<Reserve> findAllByResaBisNameAndResStatusAndResMonth(String resaBisName, String resStatus,String resMonth);
 
-    Optional<Reserve>  findByResaBisNameAndResMonthAndResDayAndResTimeAndVisitName(String resaBisName, String resMonth, String resDay, String resTime,String visitName);
+    Optional<Reserve>  findByResaBisNameAndResMonthAndResDayAndResTimeAndPrName(String resaBisName, String resMonth, String resDay, String resTime,String prName);
 
     Long countReserveByResaBisNameAndResMonthAndResDayAndResStatus(String resaBisName, String resMonth, String resDay,String resStatus);
 
     Long countReserveByResaBisNameAndResMonthAndResStatus(String resaBisName, String resMonth, String resStatus);
+
+    Integer countReserveByResaBisNameAndResStatus(String resaBisName, String resStatus);
 }

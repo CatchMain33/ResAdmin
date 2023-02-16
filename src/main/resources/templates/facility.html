@@ -3,6 +3,25 @@
 <!-- head.html -->
 <div th:replace="fragment/head :: head"></div>
 <!-- head.html 끝 -->
+<style>
+  .fac1 {
+    display: flex;
+    margin-bottom: 23px;
+  }
+  .fac2 {
+    display: flex;
+    width: 358px;
+  }
+  .fac3 {
+    width: 222px;
+  }
+  .fac4 {
+    width: 113px;
+  }
+  .fac5 {
+    display: flex;
+  }
+</style>
 <body>
 <!-- header.html -->
 <div th:replace="fragment/header :: header"></div>
@@ -17,74 +36,106 @@
         <article class="widget">
           <header class="widget__header">
             <h3 class="widget__title" style="font-size: 21px;
-                        font-weight: bold;">식당 정원 및 테이블 등록</h3>
+                        font-weight: bold;">식당 편의시설 등록</h3>
           </header>
-                  <div>
-                    <p>
-                      주차가능 여부 :
-                      <select id="parking">
-                        <option value="1">가능</option>
-                        <option value="0">불가능</option>
-                      </select>
-                      현재 상태 :
-                      <span th:if="${fac.facParking==true}">가능</span>
-                      <span th:if="${fac.facParking==false}">불가능</span>
-                    </p>
-                    <p>
-                      발렛가능 여부 :
-                      <select id="valet">
-                        <option value="1">가능</option>
-                        <option value="0">불가능</option>
-                      </select>
-                      현재 상태 :
-                      <span th:if="${fac.facValet==true}">가능</span>
-                      <span th:if="${fac.facValet==false}">불가능</span>
-                    </p>
-                    <p>
-                      콜키지 가능 여부 :
-                      <select id="corkage">
-                        <option value="1">가능</option>
-                        <option value="0">불가능</option>
-                      </select>
-                      현재 상태 :
-                      <span th:if="${fac.facCorkage==true}">가능</span>
-                      <span th:if="${fac.facCorkage==false}">불가능</span>
-                    </p>
-                    <p>
-                      노키즈존 :
-                      <select id="nokid">
-                        <option value="1">가능</option>
-                        <option value="0">불가능</option>
-                      </select>
-                      현재 상태 :
-                      <span th:if="${fac.facNokid==true}">가능</span>
-                      <span th:if="${fac.facNokid==false}">불가능</span>
-                    </p>
-                    <p>
-                      반려동물동반 가능 여부 :
-                      <select id="animal">
-                        <option value="1">가능</option>
-                        <option value="0">불가능</option>
-                      </select>
-                      현재 상태 :
-                      <span th:if="${fac.facAnimal==true}">가능</span>
-                      <span th:if="${fac.facAnimal==false}">불가능</span>
-                    </p>
-                    <p>
-                      장애인 편의시설 유무 :
-                      <select id="handi">
-                        <option value="1">가능</option>
-                        <option value="0">불가능</option>
-                      </select>
-                      현재 상태 :
-                      <span th:if="${fac.facHandi==true}">가능</span>
-                      <span th:if="${fac.facHandi==false}">불가능</span>
-                    </p>
-                    <div>
-                      <button id="bdBtn" class="btn btn-skyblue" type="submit">
-                        보내기
-                      </button>
-                    </div>
+
+                      <div style="font-size: 17px;">
+                        <div class="fac1" style="display: flex;">
+                          <div class="fac2">
+                            <div class="fac3">주차가능 여부</div>
+                            <select class="fac4" id="parking">
+                              <option value="1">가능</option>
+                              <option value="0">불가능</option>
+                            </select>
+                          </div>
+                          <div >
+                            <div class="fac5">
+                              <span th:if="${fac.facParking==true}">가능</span>
+                              <span th:if="${fac.facParking==false}">불가능</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="fac1" style="display: flex">
+                          <div class="fac2">
+                            <div class="fac3">발렛가능 여부</div>
+                            <select class="fac4" id="valet">
+                              <option value="1">가능</option>
+                              <option value="0">불가능</option>
+                            </select>
+                          </div>
+                          <div >
+                            <div class="fac5">
+                              <span th:if="${fac.facValet==true}">가능</span>
+                              <span th:if="${fac.facValet==false}">불가능</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="fac1" style="display: flex">
+                          <div class="fac2">
+                            <div class="fac3">콜키지 가능 여부</div>
+                            <select class="fac4" id="corkage">
+                              <option value="1">가능</option>
+                              <option value="0">불가능</option>
+                            </select>
+                          </div>
+                          <div >
+                            <div class="fac5">
+                              <span th:if="${fac.facCorkage==true}">가능</span>
+                              <span th:if="${fac.facCorkage==false}">불가능</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="fac1" style="display: flex">
+                          <div class="fac2">
+                            <div class="fac3">노키즈존</div>
+                            <select class="fac4" id="nokid">
+                              <option value="1">가능</option>
+                              <option value="0">불가능</option>
+                            </select>
+                          </div>
+                          <div >
+                            <div class="fac5">
+                              <span th:if="${fac.facNokid==true}">가능</span>
+                              <span th:if="${fac.facNokid==false}">불가능</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="fac1" style="display: flex">
+                          <div class="fac2">
+                            <div class="fac3">반려동물동반 가능 여부</div>
+                            <select class="fac4" id="animal">
+                              <option value="1">가능</option>
+                              <option value="0">불가능</option>
+                            </select>
+                          </div>
+                          <div >
+                            <div class="fac5">
+                              <span th:if="${fac.facAnimal==true}">가능</span>
+                              <span th:if="${fac.facAnimal==false}">불가능</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="fac1" style="display: flex">
+                          <div class="fac2">
+                            <div class="fac3">장애인 편의시설 유무</div>
+                            <select class="fac4" id="handi">
+                              <option value="1">가능</option>
+                              <option value="0">불가능</option>
+                            </select>
+                          </div>
+                          <div >
+                            <div class="fac5">
+                              <span th:if="${fac.facHandi==true}">가능</span>
+                              <span th:if="${fac.facHandi==false}">불가능</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div style="text-align: right;">
+                          <button id="bdBtn" class="btn btn-skyblue" type="submit">
+                            보내기
+                          </button>
+                        </div>
+                      </div>
           </article>
       </div>
     </div>

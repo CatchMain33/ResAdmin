@@ -64,8 +64,8 @@ public class ReserveApiLogicService extends BaseService<ReserveApiRequest, Reser
         return Header.OK(reserveApiResponses);
     }
 
-    public Header<ReserveApiResponse> updateStatus(String resaBisName,String resStatus,String resMonth, String resDay,String resTime ,String resReason,String visitName){
-        Optional<Reserve> reserve = reserveRepository.findByResaBisNameAndResMonthAndResDayAndResTimeAndVisitName(resaBisName,resMonth,resDay,resTime,visitName);
+    public Header<ReserveApiResponse> updateStatus(String resaBisName,String resStatus,String resMonth, String resDay,String resTime ,String resReason,String prName){
+        Optional<Reserve> reserve = reserveRepository.findByResaBisNameAndResMonthAndResDayAndResTimeAndPrName(resaBisName,resMonth,resDay,resTime,prName);
         return reserve.map(
                         user->{
                             user.setResStatus(resStatus);

@@ -37,6 +37,7 @@ let totcost9;
 let totcost10;
 let totcost11;
 let totcost12;
+let cnt;
 function number_format(number, decimals, dec_point, thousands_sep) {
     // *     example: number_format(1234.56, 2, ',', ' ');
     // *     return: '1 234,56'
@@ -603,6 +604,8 @@ function mmonth12(){
         data: data1,
         success: function(result) {
             if (result) {
+                cnt = 0
+                console.log(cnt)
                 console.log(result.data)
                 month1112 = Object.keys(result.data).length;
                 console.log("12월예약 건수 : "+month1112);
@@ -628,6 +631,8 @@ function mmmonth12(){
         data: data1,
         success: function(result) {
             if (result) {
+                cnt = 0
+                console.log(cnt)
                 console.log(result.data)
                 mmonth1112 = Object.keys(result.data).length;
                 console.log("12월예약 건수 : "+mmonth1112);

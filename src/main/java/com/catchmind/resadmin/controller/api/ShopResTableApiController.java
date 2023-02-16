@@ -61,4 +61,11 @@ public class ShopResTableApiController extends CrudController<ShopResTableApiReq
         String resaBisName = name;
         return shopResTableApiLogicService.updatestatus(resaBisName,shopResMonth,shopResDay,shopResTime,shopResStatus);
     }
+
+    @GetMapping("/createResTable")
+    public boolean createDate(@RequestParam("shopResMonth")String shopResMonth, @RequestParam("shopResDay") String shopResDay,HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        String name = (String)session.getAttribute("name");
+        return shopResTableApiLogicService.createDate(shopResMonth,shopResDay,name);
+    }
 }

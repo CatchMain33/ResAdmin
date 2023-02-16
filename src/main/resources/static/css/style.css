@@ -2584,7 +2584,7 @@ input[type=radio]#tab4:checked ~ .tabs__content .tabs__content--4 {
 .social_msg {
   width: 100%;
   padding: 40px 25px 30px 25px;
-  border-bottom: 1px solid #e5e5e5;
+  /*border-bottom: 1px solid #e5e5e5;*/
 }
 
 /* line 485, ../sass/partials/_layout.scss */

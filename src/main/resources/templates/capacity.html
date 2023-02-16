@@ -3,6 +3,56 @@
 <!-- head.html -->
 <div th:replace="fragment/head :: head"></div>
 <!-- head.html 끝 -->
+<style>
+  .modal-overlay {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    z-index: 1;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .modal-window {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 400px;
+    height: 325px;
+    position: relative;
+    top: -100px;
+    padding: 10px;
+  }
+  .title {
+    padding-left: 10px;
+    display: inline;
+    /*text-shadow: 1px 1px 2px gray;*/
+    color: black;
+
+  }
+  .title h2 {
+    display: inline;
+  }
+  .close-area {
+    display: inline;
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+    /*text-shadow: 1px 1px 2px gray;*/
+    color: black;
+  }
+
+  .content {
+    margin-top: 20px;
+    /*padding: 0px 10px;*/
+    /*text-shadow: 1px 1px 2px gray;*/
+    color: black;
+  }
+</style>
 <body>
 <!-- header.html -->
 <div th:replace="fragment/header :: header"></div>
@@ -23,9 +73,12 @@
             <div class="widget__content">
               <input type="text" class="input-text" id="totcapacity" name="totcapacity" placeholder="테이블당 인원" style="padding-left: 12px;"/>
               <input type="text" class="input-text" id="tottable" name="tottable" placeholder="총 테이블수" style="padding-left: 12px;"/>
-              <div style="width: 100%;">
+              <div style="width: 100%;display: flex;justify-content: flex-end;margin-top: 10px;">
                 <div style="text-align: right;">
                   <a id="bdBtn" class="btn red small" style="margin: 0;color: white">저장하기</a>
+                </div>
+                <div style="text-align: right;margin-left: 5px;">
+                  <a class="btn blue small" style="margin: 0;color: white;"  id="btn-modal">날짜입력</a>
                 </div>
               </div>
             </div>
@@ -35,9 +88,35 @@
     </div>
   </section> <!-- /content -->
 </div> <!-- /wrapper -->
+<div id="modal" class="modal-overlay">
+  <div class="modal-window" style="margin-top: 168px;height: 27%;">
+    <div class="title">
+      <h2 class="drawer-box-title ml-10" style="font-size: 19px;">날짜를 입력해주세요</h2>
+    </div>
+    <div class="close-area">X</div>
+    <div class="content" style="padding:0;margin: 0;">
+      <div class="drawer-box">
+        <div class="wrapper" style="width: 100%">
+          <main id="main" style="padding: 0;text-align-last: center;">
+            <div style="margin-top: 36px;margin-bottom: 15px;">
+              <input type="text" id="month" placeholder="달을 입력해주세요" style="padding: 9px;width: 60%;">
+            </div>
+            <div style="margin-top: 14px;margin-bottom: 47px;">
+              <input type="text" id="day" placeholder="일을 입력해주세요" style="padding: 9px;width: 60%;">
+            </div>
+            <div style="text-align: right;">
+              <a class="btn blue small" onclick="sendTime()" style="margin: 0;color: white;width: 100%;" >입력완료</a>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <!--footer.html 시작-->
 <div th:replace="fragment/footer :: footer"></div>
 <!--footer.html 끝-->
 <script src="/js/capacity.js"></script>
+<script src="/js/joinModal.js"></script>
 </body>
 </html>

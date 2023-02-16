@@ -1,7 +1,7 @@
 package com.catchmind.resadmin.controller.api;
 
 import com.catchmind.resadmin.controller.CrudController;
-import com.catchmind.resadmin.model.entity.totalTable;
+import com.catchmind.resadmin.model.entity.TotalTable;
 import com.catchmind.resadmin.model.network.Header;
 import com.catchmind.resadmin.model.network.request.CapacityApiRequest;
 import com.catchmind.resadmin.model.network.response.CapacityApiResponse;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/api/capacity")    // http://localhost:8888/api/capacity
 @RequiredArgsConstructor
-public class CapacityApiController extends CrudController<CapacityApiRequest, CapacityApiResponse, totalTable> {
+public class CapacityApiController extends CrudController<CapacityApiRequest, CapacityApiResponse, TotalTable> {
     private final CapacityApiLogicService capacityApiLogicService;
 
     @Override

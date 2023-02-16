@@ -1,6 +1,6 @@
 package com.catchmind.resadmin.service;
 
-import com.catchmind.resadmin.model.entity.totalTable;
+import com.catchmind.resadmin.model.entity.TotalTable;
 import com.catchmind.resadmin.model.network.Header;
 import com.catchmind.resadmin.model.network.request.CapacityApiRequest;
 import com.catchmind.resadmin.model.network.response.CapacityApiResponse;
@@ -12,10 +12,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CapacityApiLogicService extends BaseService<CapacityApiRequest, CapacityApiResponse, totalTable> {
+public class CapacityApiLogicService extends BaseService<CapacityApiRequest, CapacityApiResponse, TotalTable> {
     private final CapacityRepository capacityRepository;
 
-    private CapacityApiResponse response(totalTable capacity){
+    private CapacityApiResponse response(TotalTable capacity){
         CapacityApiResponse capacityApiResponse = CapacityApiResponse.builder()
                 .totTableId(capacity.getTotTableId())
                 .resaBisName(capacity.getResaBisName())
@@ -45,7 +45,7 @@ public class CapacityApiLogicService extends BaseService<CapacityApiRequest, Cap
     }
 
     public Header<CapacityApiResponse> update11(String resaBisName,String totCapacity,String totTable){
-        Optional<totalTable> capacity = capacityRepository.findByResaBisName(resaBisName);
+        Optional<TotalTable> capacity = capacityRepository.findByResaBisName(resaBisName);
         return capacity.map(
                         user->{
                             user.setTotCapacity(totCapacity);

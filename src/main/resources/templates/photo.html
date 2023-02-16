@@ -22,13 +22,15 @@
           <form action="api/photo/upload" method="post" enctype="multipart/form-data">
             <div class="widget__content">
               식당이름 : <input type="text" th:value="${name}" id="resaBisName" readonly style="border: none"/>
-              <h4>단일 파일 업로드</h4>
-              <input type="file" name="file">
+              <h4 style="display: none">단일 파일 업로드</h4>
+              <input type="file" name="file" style="margin-top: 12px;">
 
 <!--              <h4>다중 파일 업로드</h4>-->
 <!--              <input type="file" multiple="multiple" name="files">-->
-
-              <a href="index.html"><input type="submit"/></a>
+            </div>
+            <div style="text-align: right">
+              <a href="index.html"><input type="submit" style="padding: 5px 21px;background-color: #e6e6e6;border: none;color: #959595;"/></a>
+            </div>
           </form>
         </article>
       </div>
