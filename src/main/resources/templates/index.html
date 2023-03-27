@@ -15,9 +15,9 @@
         <div class="main-stats row">
             <div class="main-stats__stat col-lg-3 col-md-12 col-sm-12" style="padding-bottom: 0;">
                 <h3 class="stat__title">
-                    <a href="/salesStatus" style="text-decoration: none; color: #9a9a9a;">Total balance</a>
+                    <a href="/salesStatus" style="text-decoration: none; color: #9a9a9a;">Total money</a>
                 </h3>
-                <div class="stat__number"><span>$</span> 124,057</div>
+                <div class="stat__number" th:text="${total_money}"></div>
                 <div class="progress">
                     <div class="progress-bar progress-bar--skyblue" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%; background-color: #b2b5ff;" ></div>
                 </div>
@@ -27,8 +27,8 @@
                 </p>
             </div>
             <div class="main-stats__stat col-lg-3 col-md-12 col-sm-12" style="padding-bottom: 0;">
-                <h3 class="stat__title"><a href="/reservation" style="text-decoration: none; color: #9a9a9a;">New Reservation</a></h3>
-                <div class="stat__number"><span>R</span> 7,068</div>
+                <h3 class="stat__title"><a href="/reservation" style="text-decoration: none; color: #9a9a9a;">total reserve</a></h3>
+                <div class="stat__number" th:text="${total}">14</div>
                 <div class="progress">
                     <div class="progress-bar progress-bar--anzac" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%; background-color: #ff9c4b;"></div>
                 </div>

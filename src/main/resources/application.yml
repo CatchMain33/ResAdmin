@@ -9,7 +9,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
+  servlet:
+    multipart:
+      max-file-size: 200MB
+      max-request-size: 100MB
+      location: D:/test/
 server:
   port: 9999
 

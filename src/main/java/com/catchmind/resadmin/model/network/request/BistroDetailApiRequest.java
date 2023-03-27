@@ -19,5 +19,5 @@ public class BistroDetailApiRequest {  // 프론트 > 백
     private String bdHour;
     private String bdHoliday;
     private String resaBisName;
-    private String bdHome;
+    private String bdHomepage;
 }

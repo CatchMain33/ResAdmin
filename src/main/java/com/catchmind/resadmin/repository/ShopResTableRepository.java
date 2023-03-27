@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface ShopResTableRepository extends JpaRepository<ShopResTable,Long> {
-    Optional<ShopResTable> findByResaBisNameAndShopResMonthAndShopResDayAndAndShopResTime(String resaBisName,String shopResMonth,String shopResDay,String shopResTime);
+    Optional<ShopResTable> findByAndTotTableIdAndShopResMonthAndShopResDayAndAndShopResTime(int totTableId,String shopResMonth,String shopResDay,String shopResTime);
 
-    List<ShopResTable> findAllByResaBisNameAndShopResMonthAndShopResDay(String resaBisName, String shopResMonth, String shopResDay);
+    List<ShopResTable> findAllByTotTableIdAndShopResMonthAndShopResDay(int totTableId, String shopResMonth, String shopResDay);
 }

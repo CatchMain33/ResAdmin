@@ -20,4 +20,5 @@ public class ShopResTableApiRequest {
     private String shopResDay;
     private String shopResTime;
     private boolean shopResStatus;
+    private int totTableId;
 }

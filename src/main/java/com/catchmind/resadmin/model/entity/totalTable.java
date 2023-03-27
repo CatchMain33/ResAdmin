@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @ToString(callSuper = true)     // //
 @EntityListeners(AuditingEntityListener.class)
-public class totalTable {
+public class TotalTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long totTableId;

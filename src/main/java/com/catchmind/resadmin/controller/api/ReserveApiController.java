@@ -129,12 +129,12 @@ public class ReserveApiController extends CrudController<ReserveApiRequest, Rese
     }
 
     @GetMapping("/modify")
-    public Header<ReserveApiResponse> statusUpdate(String resaBisName,@RequestParam("resStatus")String resStatus, @RequestParam("resMonth") String resMonth , @RequestParam("resDay") String resDay, @RequestParam("resTime") String resTime, @RequestParam("resReason") String resReason,@RequestParam("visitName") String visitName, HttpServletRequest request){
+    public Header<ReserveApiResponse> statusUpdate(String resaBisName,@RequestParam("resStatus")String resStatus, @RequestParam("resMonth") String resMonth , @RequestParam("resDay") String resDay, @RequestParam("resTime") String resTime, @RequestParam("resReason") String resReason,@RequestParam("prName") String prName, HttpServletRequest request){
         HttpSession session =request.getSession(false);
         String name;
         name = (String)session.getAttribute("name");
         resaBisName = name;
-        return reserveApiLogicService.updateStatus(resaBisName,resStatus,resMonth,resDay,resTime,resReason,visitName);
+        return reserveApiLogicService.updateStatus(resaBisName,resStatus,resMonth,resDay,resTime,resReason,prName);
     }
 
     @GetMapping("/daycom")

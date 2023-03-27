@@ -2,7 +2,9 @@ package com.catchmind.resadmin.controller.page;
 
 import com.catchmind.resadmin.model.network.Header;
 import com.catchmind.resadmin.model.network.response.FacilityApiResponse;
+import com.catchmind.resadmin.repository.ReserveRepository;
 import com.catchmind.resadmin.service.FacilityApiLogicService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +17,12 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("")
+@RequiredArgsConstructor
 public class PageController {
     @Autowired
     private FacilityApiLogicService facilityApiLogicService;
+
+    private final ReserveRepository reserveRepository;
 
     // 식당 관리자 메인페이지
     // http://localhost:8888/index
@@ -26,7 +31,8 @@ public class PageController {
         HttpSession session = request.getSession(false);
         String id = null;
         String name = null;
-
+        Integer planned = 0;
+        Integer done = 0;
         if(session == null){
             System.out.println("세션이 없습니다.");
             return new ModelAndView("/login");
@@ -36,7 +42,13 @@ public class PageController {
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/index");
+
+        planned = reserveRepository.countReserveByResaBisNameAndResStatus(name,"PLANNED");
+        done = reserveRepository.countReserveByResaBisNameAndResStatus(name,"DONE");
+        System.out.println(name);
+        Integer total = planned+done;
+        Integer total_money = total*50000;
+        return new ModelAndView("/index").addObject("total",total).addObject("total_money",total_money);
     }
 
     // 식당 일정 관리 캘린더

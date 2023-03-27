@@ -20,6 +20,48 @@
         justify-content: space-between;
         line-height: 33px;
     }
+
+    .person{
+        width: 42px;
+    }
+    .request{
+        width: 430px;
+    }
+    .modal__main > div {
+        display: flex;
+    }
+    .modal__main {
+        margin-top: 30px;
+        margin-bottom: 14px;
+    }
+    .qn {
+        width: 120px;
+        text-align: left;
+        margin-left: 21px;
+    }
+    .bb {
+        justify-content: flex-end;
+        margin-right: 19px;
+    }
+    .bb1{
+        width: 85px;
+        height: 40px;
+        margin: 0;
+    }
+    .qs {
+        height: 35px;
+        width: 132px;
+    }
+    .qi {
+        height: 95px;
+        width: 64%;
+        margin-bottom: 22px;
+        margin-top: 10px;
+    }
+    .tt {
+        line-height: unset;
+        margin: 0;
+    }
 </style>
 <!-- head.html 끝 -->
 <script src="https://unpkg.com/vue@3"></script>
@@ -86,53 +128,55 @@
                                     <div class="restatus">예약상태변경</div>
                                 </label>
                             </div>
-                            <div class="tabs__content" >
+                            <div class="tabs__content" style="height: auto;">
                                 <div class="tabs__content--1"id="tabs__content--1" style=" min-width: 100%;">
                                     <div class="media social_msg" id="itemList1">
-                                        <div v-for="dto in itemList1">
+                                        <div v-for="dto in itemList1" style="margin-bottom: 39px;">
                                             <div class="res_list" >
-                                                <div id="check1">{{dto.visitName}}</div>
+                                                <div id="check1">{{dto.prName}}</div>
                                                 <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
-                                                <div>{{dto.resPerson}}명</div>
-                                                <div>{{dto.visitHp}}</div>
-                                                <div>{{dto.resRequest}}</div>
+                                                <div class="person">{{dto.resPerson}}명</div>
+                                                <div>{{dto.resHp}}</div>
+                                                <div class="request">{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;color: white;">예약상태변경</button>
                                                 </div>
                                                 <div class="modal hidden1">
                                                     <div class="modal">
                                                         <div class="modal__overlay"></div>
                                                         <div class="modal__contents">
-                                                            <div class="modal__header">
-                                                                cancel or noshow
-                                                            </div>
+                                                            <!--                                                            <div class="modal__header">-->
+                                                            <!--                                                                cancel or noshow-->
+                                                            <!--                                                            </div>-->
                                                             <div class="modal__main">
-                                                                <p>
-                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
-                                                                </p>
-                                                                <p>
-                                                                    방문날짜 :
+                                                                <div >
+                                                                    <p  class="qn">방문자 이름</p>
+                                                                    <span class="name">{{dto.prName}}</span>
+                                                                </div>
+                                                                <div >
+                                                                    <p class="qn">방문날짜</p>
                                                                     <span class="month">{{dto.resMonth}}</span>월
-                                                                    <span class="day">{{dto.resDay}} </span>일
-                                                                    <span class="time">{{dto.resTime}}</span>시
-                                                                </p>
-                                                                <p>
-                                                                    status :
-                                                                    <select>
+                                                                    <span class="day">{{dto.resDay}}</span>일
+                                                                    <span class="tt time">{{dto.resTime}}</span>시
+                                                                </div>
+                                                                <div>
+                                                                    <p class="qn" >status</p>
+                                                                    <select class="qs">
                                                                         <option value="DONE">방문완료</option>
                                                                         <option value="CANCEL">예약취소</option>
                                                                         <option value="NOSHOW">노쇼</option>
                                                                     </select>
-                                                                </p>
-                                                                <p>
-                                                                    reason :<input type="text" name="reason">
-                                                                </p>
-                                                                <div>
-                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
-                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div >
+                                                                <div >
+                                                                    <p class="qn">reason</p>
+                                                                    <input class="qi" type="text" name="reason" placeholder="취소 사유를 입력해주세요">
+                                                                </div>
+                                                                <div class="bb">
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue bb1" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button bb1" type="button">닫기</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -145,50 +189,52 @@
 
                                 <div class="tabs__content--2"id="tabs__content--2"style=" min-width: 100%;">
                                     <div class="media social_msg" id="itemList2">
-                                        <div v-for="dto in itemList2">
+                                        <div v-for="dto in itemList2" style="margin-bottom: 39px;">
                                             <div class="res_list">
-                                                <div id="check2">{{dto.visitName}}</div>
+                                                <div id="check2">{{dto.prName}}</div>
                                                 <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
-                                                <div>{{dto.resPerson}}명</div>
-                                                <div>{{dto.visitHp}}</div>
-                                                <div>{{dto.resRequest}}</div>
+                                                <div class="person">{{dto.resPerson}}명</div>
+                                                <div>{{dto.resHp}}</div>
+                                                <div class="request">{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;color: white;">예약상태변경</button>
                                                 </div>
                                                 <div class="modal hidden1">
                                                     <div class="modal">
                                                         <div class="modal__overlay"></div>
                                                         <div class="modal__contents">
-                                                            <div class="modal__header">
-                                                                cancel or noshow
-                                                            </div>
+<!--                                                            <div class="modal__header">-->
+<!--                                                                cancel or noshow-->
+<!--                                                            </div>-->
                                                             <div class="modal__main">
-                                                                <p>
-                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
-                                                                </p>
-                                                                <p>
-                                                                    방문날짜 :
+                                                                <div >
+                                                                    <p  class="qn">방문자 이름</p>
+                                                                    <span class="name">{{dto.prName}}</span>
+                                                                </div>
+                                                                <div >
+                                                                    <p class="qn">방문날짜</p>
                                                                     <span class="month">{{dto.resMonth}}</span>월
-                                                                    <span class="day">{{dto.resDay}} </span>일
-                                                                    <span class="time">{{dto.resTime}}</span>시
-                                                                </p>
-                                                                <p>
-                                                                    status :
-                                                                    <select>
+                                                                    <span class="day">{{dto.resDay}}</span>일
+                                                                    <span class="tt time">{{dto.resTime}}</span>시
+                                                                </div>
+                                                                <div>
+                                                                    <p class="qn" >status</p>
+                                                                    <select class="qs">
                                                                         <option value="DONE">방문완료</option>
                                                                         <option value="CANCEL">예약취소</option>
                                                                         <option value="NOSHOW">노쇼</option>
                                                                     </select>
-                                                                </p>
-                                                                <p>
-                                                                    reason :<input type="text" name="reason">
-                                                                </p>
-                                                                <div>
-                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
-                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div >
+                                                                <div >
+                                                                    <p class="qn">reason</p>
+                                                                    <input class="qi" type="text" name="reason" placeholder="취소 사유를 입력해주세요">
+                                                                </div>
+                                                                <div class="bb">
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue bb1" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button bb1" type="button">닫기</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -201,50 +247,52 @@
 
                                 <div class="tabs__content--3"id="tabs__content--3"style=" min-width: 100%;">
                                     <div class="media social_msg" id="itemList3">
-                                        <div v-for="dto in itemList3">
+                                        <div v-for="dto in itemList3" style="margin-bottom: 39px;">
                                             <div class="res_list">
-                                                <div id="check3">{{dto.visitName}}</div>
+                                                <div id="check3">{{dto.prName}}</div>
                                                 <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
-                                                <div>{{dto.resPerson}}명</div>
-                                                <div>{{dto.visitHp}}</div>
-                                                <div>{{dto.resRequest}}</div>
+                                                <div class="person">{{dto.resPerson}}명</div>
+                                                <div class="hp">{{dto.resHp}}</div>
+                                                <div class="request">{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;color: white;">예약상태변경</button>
                                                 </div>
                                                 <div class="modal hidden1">
                                                     <div class="modal">
                                                         <div class="modal__overlay"></div>
                                                         <div class="modal__contents">
-                                                            <div class="modal__header">
-                                                                cancel or noshow
-                                                            </div>
+                                                            <!--                                                            <div class="modal__header">-->
+                                                            <!--                                                                cancel or noshow-->
+                                                            <!--                                                            </div>-->
                                                             <div class="modal__main">
-                                                                <p>
-                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
-                                                                </p>
-                                                                <p>
-                                                                    방문날짜 :
+                                                                <div >
+                                                                    <p  class="qn">방문자 이름</p>
+                                                                    <span class="name">{{dto.prName}}</span>
+                                                                </div>
+                                                                <div >
+                                                                    <p class="qn">방문날짜</p>
                                                                     <span class="month">{{dto.resMonth}}</span>월
-                                                                    <span class="day">{{dto.resDay}} </span>일
-                                                                    <span class="time">{{dto.resTime}}</span>시
-                                                                </p>
-                                                                <p>
-                                                                    status :
-                                                                    <select>
+                                                                    <span class="day">{{dto.resDay}}</span>일
+                                                                    <span class="tt time">{{dto.resTime}}</span>시
+                                                                </div>
+                                                                <div>
+                                                                    <p class="qn" >status</p>
+                                                                    <select class="qs">
                                                                         <option value="DONE">방문완료</option>
                                                                         <option value="CANCEL">예약취소</option>
                                                                         <option value="NOSHOW">노쇼</option>
                                                                     </select>
-                                                                </p>
-                                                                <p>
-                                                                    reason :<input type="text" name="reason">
-                                                                </p>
-                                                                <div>
-                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
-                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div >
+                                                                <div >
+                                                                    <p class="qn">reason</p>
+                                                                    <input class="qi" type="text" name="reason" placeholder="취소 사유를 입력해주세요">
+                                                                </div>
+                                                                <div class="bb">
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue bb1" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button bb1" type="button">닫기</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -257,50 +305,52 @@
 
                                 <div class="tabs__content--4"id="tabs__content--4"style=" min-width: 100%;">
                                     <div class="media social_msg" id="itemList4">
-                                        <div v-for="dto in itemList4">
+                                        <div v-for="dto in itemList4" style="margin-bottom: 39px;">
                                             <div class="res_list" >
-                                                <div id="check4">{{dto.visitName}}</div>
+                                                <div id="check4">{{dto.prName}}</div>
                                                 <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
-                                                <div>{{dto.resPerson}}명</div>
-                                                <div>{{dto.visitHp}}</div>
-                                                <div>{{dto.resRequest}}</div>
+                                                <div class="person">{{dto.resPerson}}명</div>
+                                                <div class="hp">{{dto.resHp}}</div>
+                                                <div class="request">{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;color: white;">예약상태변경</button>
                                                 </div>
                                                 <div class="modal hidden1">
                                                     <div class="modal">
                                                         <div class="modal__overlay"></div>
                                                         <div class="modal__contents">
-                                                            <div class="modal__header">
-                                                                cancel or noshow
-                                                            </div>
+                                                            <!--                                                            <div class="modal__header">-->
+                                                            <!--                                                                cancel or noshow-->
+                                                            <!--                                                            </div>-->
                                                             <div class="modal__main">
-                                                                <p>
-                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
-                                                                </p>
-                                                                <p>
-                                                                    방문날짜 :
+                                                                <div >
+                                                                    <p  class="qn">방문자 이름</p>
+                                                                    <span class="name">{{dto.prName}}</span>
+                                                                </div>
+                                                                <div >
+                                                                    <p class="qn">방문날짜</p>
                                                                     <span class="month">{{dto.resMonth}}</span>월
-                                                                    <span class="day">{{dto.resDay}} </span>일
-                                                                    <span class="time">{{dto.resTime}}</span>시
-                                                                </p>
-                                                                <p>
-                                                                    status :
-                                                                    <select>
+                                                                    <span class="day">{{dto.resDay}}</span>일
+                                                                    <span class="tt time">{{dto.resTime}}</span>시
+                                                                </div>
+                                                                <div>
+                                                                    <p class="qn" >status</p>
+                                                                    <select class="qs">
                                                                         <option value="DONE">방문완료</option>
                                                                         <option value="CANCEL">예약취소</option>
                                                                         <option value="NOSHOW">노쇼</option>
                                                                     </select>
-                                                                </p>
-                                                                <p>
-                                                                    reason :<input type="text" name="reason">
-                                                                </p>
-                                                                <div>
-                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
-                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div >
+                                                                <div >
+                                                                    <p class="qn">reason</p>
+                                                                    <input class="qi" type="text" name="reason" placeholder="취소 사유를 입력해주세요">
+                                                                </div>
+                                                                <div class="bb">
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue bb1" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button bb1" type="button">닫기</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -313,50 +363,52 @@
 
                                 <div class="tabs__content--5" id="tabs__content--5"style=" min-width: 100%;">
                                     <div class="media social_msg" id="itemList5">
-                                        <div v-for="dto in itemList5">
+                                        <div v-for="dto in itemList5" style="margin-bottom: 39px;">
                                             <div class="res_list" >
-                                                <div id="check5">{{dto.visitName}}</div>
+                                                <div id="check5">{{dto.prName}}</div>
                                                 <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
-                                                <div>{{dto.resPerson}}명</div>
-                                                <div>{{dto.visitHp}}</div>
-                                                <div>{{dto.resRequest}}</div>
+                                                <div class="person">{{dto.resPerson}}명</div>
+                                                <div class="hp">{{dto.resHp}}</div>
+                                                <div class="request">{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;color: white;">예약상태변경</button>
                                                 </div>
                                                 <div class="modal hidden1">
                                                     <div class="modal">
                                                         <div class="modal__overlay"></div>
                                                         <div class="modal__contents">
-                                                            <div class="modal__header">
-                                                                cancel or noshow
-                                                            </div>
+                                                            <!--                                                            <div class="modal__header">-->
+                                                            <!--                                                                cancel or noshow-->
+                                                            <!--                                                            </div>-->
                                                             <div class="modal__main">
-                                                                <p>
-                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
-                                                                </p>
-                                                                <p>
-                                                                    방문날짜 :
+                                                                <div >
+                                                                    <p  class="qn">방문자 이름</p>
+                                                                    <span class="name">{{dto.prName}}</span>
+                                                                </div>
+                                                                <div >
+                                                                    <p class="qn">방문날짜</p>
                                                                     <span class="month">{{dto.resMonth}}</span>월
-                                                                    <span class="day">{{dto.resDay}} </span>일
-                                                                    <span class="time">{{dto.resTime}}</span>시
-                                                                </p>
-                                                                <p>
-                                                                    status :
-                                                                    <select>
+                                                                    <span class="day">{{dto.resDay}}</span>일
+                                                                    <span class="tt time">{{dto.resTime}}</span>시
+                                                                </div>
+                                                                <div>
+                                                                    <p class="qn" >status</p>
+                                                                    <select class="qs">
                                                                         <option value="DONE">방문완료</option>
                                                                         <option value="CANCEL">예약취소</option>
                                                                         <option value="NOSHOW">노쇼</option>
                                                                     </select>
-                                                                </p>
-                                                                <p>
-                                                                    reason :<input type="text" name="reason">
-                                                                </p>
-                                                                <div>
-                                                                    <button onclick="modify(this)" class="btn btn-skyblue" type="submit">보내기</button>
-                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button" type="button">닫기</button>
+                                                                </div >
+                                                                <div >
+                                                                    <p class="qn">reason</p>
+                                                                    <input class="qi" type="text" name="reason" placeholder="취소 사유를 입력해주세요">
+                                                                </div>
+                                                                <div class="bb">
+                                                                    <button onclick="modify(this)" class="btn btn-skyblue bb1" type="submit">보내기</button>
+                                                                    <button onclick="cclicked(this)" class="btn btn-light close_button bb1" type="button">닫기</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -369,18 +421,18 @@
 
                                 <div class="tabs__content--6" id="tabs__content--6"style=" min-width: 100%;">
                                     <div class="media social_msg" id="itemList6">
-                                        <div v-for="dto in itemList6">
+                                        <div v-for="dto in itemList6" style="margin-bottom: 39px;">
                                             <div class="res_list" >
-                                                <div id="check6">{{dto.visitName}}</div>
+                                                <div id="check6">{{dto.prName}}</div>
                                                 <div>{{dto.resMonth}}월 {{dto.resDay}}일 {{dto.resTime}}시</div>
-                                                <div>{{dto.resPerson}}명</div>
-                                                <div>{{dto.visitHp}}</div>
-                                                <div>{{dto.resRequest}}</div>
+                                                <div class="person">{{dto.resPerson}}명</div>
+                                                <div class="hp">{{dto.resHp}}</div>
+                                                <div class="request">{{dto.resRequest}}</div>
                                                 <div style="    padding: 0;
                                                 border: none;
                                                 text-align: center;
                                                 ">
-                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;">예약상태변경</button>
+                                                    <button onclick="clicked(this)" class="white btn red small" style="margin: 0;color: white;">예약상태변경</button>
                                                 </div>
                                                 <div class="modal hidden1">
                                                     <div class="modal">
@@ -391,7 +443,7 @@
                                                             </div>
                                                             <div class="modal__main">
                                                                 <p>
-                                                                    방문자 이름 : <span class="name">{{dto.visitName}}</span>
+                                                                    방문자 이름 : <span class="name">{{dto.prName}}</span>
                                                                 </p>
                                                                 <p>
                                                                     방문날짜 :
@@ -426,7 +478,7 @@
                                 <div class="tabs__content--7"id="tabs__content--7" style=" min-width: 100%;">
                                     <div class="media social_msg" style="display: flex" id="itemList7">
                                                         <div>
-                                                            <p>
+                                                            <p style="display:none;">
                                                                 일정 :
                                                                 <span class="status_month"></span>월
                                                                 <span class="status_day"></span>일
@@ -480,7 +532,7 @@
                                                             </div>
                                                         </div>
                                                         <div style="margin-left: 50px">
-                                                            <p>현재 예약상태</p>
+<!--                                                            <p>현재 예약상태</p>-->
                                                             <div v-for="dto in itemList7">
                                                                 <p>{{dto.shopResTime}}시 예약가능 여부 : <span v-if="dto.shopResStatus==true">가능</span><span v-if="dto.shopResStatus==false">불가능</span></p>
                                                             </div>
@@ -893,7 +945,7 @@
                     resMonth : month,
                     resDay : day,
                     resTime : time,
-                    visitName:name,
+                    prName:name,
                     resStatus:status,
                     resReason:reason
                 }

@@ -22,5 +22,4 @@ public class PhotoApiResponse {
 
     private String resaBisName;
 
-    private Long revIdx;
 }

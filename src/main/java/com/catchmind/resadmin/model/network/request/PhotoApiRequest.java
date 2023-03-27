@@ -22,5 +22,4 @@ public class PhotoApiRequest {
 
     private String resaBisName;
 
-    private Long revIdx;
 }

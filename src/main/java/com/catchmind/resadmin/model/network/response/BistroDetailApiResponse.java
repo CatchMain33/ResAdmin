@@ -21,7 +21,7 @@ public class BistroDetailApiResponse {
     private String bdCaution;
     private String bdHour;
     private String bdHoliday;
-    private String bdHome;
+    private String bdHomepage;
     private String resaBisName;
 
 }

@@ -26,7 +26,7 @@ public class BistroDetail{
     private String bdCaution;
     private String bdHour;
     private String bdHoliday;
-    private String bdHome;
+    private String bdHomepage;
     private String resaBisName;
     private Long bisIdx;
 }

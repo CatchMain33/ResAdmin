@@ -23,4 +23,5 @@ public class ShopResTable {
     private String shopResDay;
     private String shopResTime;
     private boolean shopResStatus;
+    private int totTableId;
 }

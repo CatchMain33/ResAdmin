@@ -24,16 +24,14 @@ public class Photo {
 
     private String resaBisName;
 
-    private Long revIdx;
 
     @Builder
-    public Photo(Long phIdx, String orgNm, String savedNm, String savedPath, String type, String resaBisName, Long revIdx) {
+    public Photo(Long phIdx, String orgNm, String savedNm, String savedPath, String type, String resaBisName) {
         this.phIdx = phIdx;
         this.orgNm = orgNm;
         this.savedNm = savedNm;
         this.savedPath = savedPath;
         this.type = type;
         this.resaBisName = resaBisName;
-        this.revIdx = revIdx;
     }
 }
