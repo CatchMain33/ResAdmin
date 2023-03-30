@@ -30,7 +30,7 @@ public class ResAdminApiController extends CrudController<ResAdminApiRequest, Re
     @Override
     @PutMapping("/re_password")
     public Header<ResAdminApiResponse> update(@RequestBody Header<ResAdminApiRequest> request) {
-        System.out.println(request.getData());
+        System.out.println("⭕" + request.getData());
         return resAdminApiLogicService.update(request);
     }
 

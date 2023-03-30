@@ -26,14 +26,14 @@ public class LoginPageController {
 
         if(session == null){
             System.out.println("세션이 없습니다.");
-            return new ModelAndView("/login");
+            return new ModelAndView("login");
 
         }else{
             id = (String)session.getAttribute("id");
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/index")
+        return new ModelAndView("index")
                 .addObject("id", id)
                 .addObject("name",name);
     }
@@ -41,7 +41,7 @@ public class LoginPageController {
     // http://localhost:8888/login
     @GetMapping(path = "login")
     public ModelAndView login(){
-        return new ModelAndView("/login");
+        return new ModelAndView("login");
     }
 
     @PostMapping(path="loginOk")  // http://localhost:8888/loginOk
@@ -73,14 +73,14 @@ public class LoginPageController {
 
         if(session == null){
             System.out.println("세션이 없습니다.");
-            return new ModelAndView("/login");
+            return new ModelAndView("login");
 
         }else{
             id = (String)session.getAttribute("id");
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/password_change");
+        return new ModelAndView("password_change");
     }
 
     // 초기값 비밀번호 변경 페이지
@@ -93,14 +93,14 @@ public class LoginPageController {
 
         if(session == null){
             System.out.println("세션이 없습니다.");
-            return new ModelAndView("/login");
+            return new ModelAndView("login");
 
         }else{
             id = (String)session.getAttribute("id");
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/re_password");
+        return new ModelAndView("re_password");
     }
 
     // 비밀번호 수정 페이지
@@ -113,14 +113,14 @@ public class LoginPageController {
 
         if(session == null){
             System.out.println("세션이 없습니다.");
-            return new ModelAndView("/login");
+            return new ModelAndView("login");
 
         }else{
             id = (String)session.getAttribute("id");
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/my_modify");
+        return new ModelAndView("my_modify");
     }
 
 }

@@ -30,28 +30,28 @@ public class NoticePageController {
 
         if(session == null){
             System.out.println("세션이 없습니다.");
-            return new ModelAndView("/login");
+            return new ModelAndView("login");
 
         }else{
             id = (String)session.getAttribute("id");
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/notice");
+        return new ModelAndView("notice");
     }
 
     // 관리자에서 제공하는 공지사항 상세페이지
     // http://localhost:8888/noticeReview
     @GetMapping(path = "noticeReview")
     public ModelAndView noticeReview(){
-        return new ModelAndView("/notice_review");
+        return new ModelAndView("notice_review");
     }
 
     @GetMapping("/noticeReview/{noIdx}")
     public ModelAndView detail(@PathVariable("noIdx") Long noIdx){
         Header<NoticeApiResponse> notice = noticeApiLogicService.read(noIdx);
         System.out.println(notice);
-        return new ModelAndView("/notice_review")
+        return new ModelAndView("notice_review")
                 .addObject("content",notice.getData());
     }
 

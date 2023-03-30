@@ -56,6 +56,6 @@ public class PhotoApiController extends CrudController<PhotoApiRequest, PhotoApi
         String resaBisName = name;
         Long phIdx = photoApiLogicService.saveFile(resaBisName,file).get().getPhIdx();
         bistroInfoApiLogicService.updatephoto(phIdx,resaBisName);
-        return "redirect:/index";
+        return "redirect:/";
     }
 }
