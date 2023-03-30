@@ -22,14 +22,14 @@ public class ReservationPageController {
 
         if(session == null){
             System.out.println("세션이 없습니다.");
-            return new ModelAndView("/login");
+            return new ModelAndView("login");
 
         }else{
             id = (String)session.getAttribute("id");
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/reservation");
+        return new ModelAndView("reservation");
     }
 
     // 예약 캘린더 페이지
@@ -42,14 +42,14 @@ public class ReservationPageController {
 
         if(session == null){
             System.out.println("세션이 없습니다.");
-            return new ModelAndView("/login");
+            return new ModelAndView("login");
 
         }else{
             id = (String)session.getAttribute("id");
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/reservation_calender");
+        return new ModelAndView("reservation_calender");
     }
 
     // 예약 취소 내역 페이지
@@ -62,14 +62,14 @@ public class ReservationPageController {
 
         if(session == null){
             System.out.println("세션이 없습니다.");
-            return new ModelAndView("/login");
+            return new ModelAndView("login");
 
         }else{
             id = (String)session.getAttribute("id");
             name = (String)session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        return new ModelAndView("/reservation_cancel");
+        return new ModelAndView("reservation_cancel");
     }
 
 

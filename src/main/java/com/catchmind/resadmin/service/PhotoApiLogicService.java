@@ -53,7 +53,7 @@ public class PhotoApiLogicService extends BaseService<PhotoApiRequest,PhotoApiRe
         String savedName = uuid + extension;
 
         // 파일을 불러올 때 사용할 파일 경로
-        String savedPath = "D:\\test/" + savedName;
+        String savedPath = "/home/ec2-user/catchMind/photo/" + savedName;
 
         String type = "rest";
 

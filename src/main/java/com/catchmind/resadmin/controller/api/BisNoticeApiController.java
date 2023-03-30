@@ -26,7 +26,7 @@ public class BisNoticeApiController {
     public String list(Model model, @PathVariable("resaBisName") String resaBisName) {
         List<BisNotice> bisNoticeDtoList = bisNoticeApiLogicService.getNoticeList(resaBisName);
         model.addAttribute("postList", bisNoticeDtoList);
-        return "/res_notice.html";
+        return "res_notice.html";
     }
 
     @PostMapping("/resNoticeWrite")
@@ -40,7 +40,7 @@ public class BisNoticeApiController {
 
     @GetMapping("/resNoticeWrite")
     public String post(){
-        return "/res_notice_write.html";
+        return "res_notice_write.html";
     }
 
 
