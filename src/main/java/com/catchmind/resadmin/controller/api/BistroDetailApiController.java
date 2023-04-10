@@ -24,10 +24,6 @@ public class BistroDetailApiController extends CrudController<BistroDetailApiReq
         return bistroDetailApiLogicService.create(request);
     }
 
-//    @PostMapping("login") // http://localhost:8888/api/admin/login
-//    public Header<BistroApiResponse> login(@RequestBody Header<BistroApiRequest> request) {
-//        return bistroApiLogicService.login(request);
-//    }
 
     @Override
     public Header<BistroDetailApiResponse> read(Long id) {
@@ -37,6 +33,7 @@ public class BistroDetailApiController extends CrudController<BistroDetailApiReq
     @Override
     @PostMapping("")
     public Header<BistroDetailApiResponse> update(@RequestBody Header<BistroDetailApiRequest> request) {
+        System.out.println(request);
         return bistroDetailApiLogicService.update(request);
     }
 

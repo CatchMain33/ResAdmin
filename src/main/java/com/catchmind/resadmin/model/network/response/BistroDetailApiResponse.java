@@ -5,15 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class BistroDetailApiResponse {
     private Long bdIdx;
-    private String bdNotice;
     private String bdPark;
     private String bdAddr;
     private String bdHp;

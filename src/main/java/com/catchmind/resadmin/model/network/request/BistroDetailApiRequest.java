@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class BistroDetailApiRequest {  // 프론트 > 백
-    private String bdNotice;
     private String bdPark;
     private String bdAddr;
     private String bdHp;

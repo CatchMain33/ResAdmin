@@ -7,9 +7,6 @@ import com.catchmind.resadmin.model.network.request.ReviewApiRequest;
 import com.catchmind.resadmin.model.network.response.ReviewApiResponse;
 import com.catchmind.resadmin.service.ReviewApiLogicService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

@@ -3,13 +3,10 @@ package com.catchmind.resadmin.service;
 
 import com.catchmind.resadmin.model.entity.Review;
 import com.catchmind.resadmin.model.network.Header;
-import com.catchmind.resadmin.model.network.Pagination;
 import com.catchmind.resadmin.model.network.request.ReviewApiRequest;
 import com.catchmind.resadmin.model.network.response.ReviewApiResponse;
 import com.catchmind.resadmin.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

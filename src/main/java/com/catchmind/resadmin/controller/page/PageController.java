@@ -1,14 +1,18 @@
 package com.catchmind.resadmin.controller.page;
 
 import com.catchmind.resadmin.model.network.Header;
+import com.catchmind.resadmin.model.network.response.BistroDetailApiResponse;
+import com.catchmind.resadmin.model.network.response.BistroInfoApiResponse;
+import com.catchmind.resadmin.model.network.response.CapacityApiResponse;
 import com.catchmind.resadmin.model.network.response.FacilityApiResponse;
 import com.catchmind.resadmin.repository.ReserveRepository;
+import com.catchmind.resadmin.service.BistroDetailApiLogicService;
+import com.catchmind.resadmin.service.BistroInfoApiLogicService;
+import com.catchmind.resadmin.service.CapacityApiLogicService;
 import com.catchmind.resadmin.service.FacilityApiLogicService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,213 +23,223 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("")
 @RequiredArgsConstructor
 public class PageController {
-    @Autowired
-    private FacilityApiLogicService facilityApiLogicService;
-
+    private final FacilityApiLogicService facilityApiLogicService;
     private final ReserveRepository reserveRepository;
+    private final BistroDetailApiLogicService bistroDetailApiLogicService;
+    private final BistroInfoApiLogicService bistroInfoApiLogicService;
+    private final CapacityApiLogicService capacityApiLogicService;
 
     // 식당 관리자 메인페이지
-    // http://localhost:8888/index
+    // http://3.38.50.114:8888/index
     @GetMapping(path = "/")
-    public ModelAndView index(HttpServletRequest request){
+    public ModelAndView index(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String id = null;
         String name = null;
         Integer planned = 0;
         Integer done = 0;
-        if(session == null){
+        if (session == null) {
             System.out.println("세션이 없습니다.");
             return new ModelAndView("login");
 
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
 
-        planned = reserveRepository.countReserveByResaBisNameAndResStatus(name,"PLANNED");
-        done = reserveRepository.countReserveByResaBisNameAndResStatus(name,"DONE");
+        planned = reserveRepository.countReserveByResaBisNameAndResStatus(name, "PLANNED");
+        done = reserveRepository.countReserveByResaBisNameAndResStatus(name, "DONE");
         System.out.println(name);
-        Integer total = planned+done;
-        Integer total_money = total*50000;
-        return new ModelAndView("index").addObject("total",total).addObject("total_money",total_money);
+        Integer total = planned + done;
+        Integer total_money = total * 50000;
+        return new ModelAndView("index").addObject("total", total).addObject("total_money", total_money);
     }
 
     // 식당 일정 관리 캘린더
-    // http://localhost:8888/myCalander
+    // http://3.38.50.114:8888/myCalander
     @GetMapping(path = "myCalander")
-    public ModelAndView myCalander(HttpServletRequest request){
+    public ModelAndView myCalander(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String id = null;
         String name = null;
 
-        if(session == null){
+        if (session == null) {
             System.out.println("세션이 없습니다.");
             return new ModelAndView("login");
 
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
         return new ModelAndView("my_calander");
     }
 
     @GetMapping(path = "re_password")
-    public ModelAndView rePassword(HttpServletRequest request){
+    public ModelAndView rePassword(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String id = null;
         String name = null;
 
-        if(session == null){
+        if (session == null) {
             System.out.println("세션이 없습니다.");
             return new ModelAndView("login");
 
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
         return new ModelAndView("re_password");
     }
 
     //식당 정보 입력 페이지
-    // http://localhost:8888/mypage
-    @GetMapping(path = "/mypage")
-    public ModelAndView mypage(HttpServletRequest request){
-        HttpSession session =request.getSession(false);
+    // http://3.38.50.114:8888/bisInfo
+    @GetMapping(path = "bisInfo")
+    public ModelAndView bisInfo(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        Header<BistroInfoApiResponse> bistroInfo = null;
         String id = null;
         String name = null;
 
-        if(session == null){
+        if (session == null) {
             System.out.println("세션이 없습니다.");
             return new ModelAndView("login");
 
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
             System.out.println("세션이 있습니다.");
+            bistroInfo = bistroInfoApiLogicService.read(name);
+
         }
-        return new ModelAndView("mypage").addObject("id", id).addObject("name",name);
+        return new ModelAndView("mypage").addObject("id", id).addObject("name", name).addObject("info" , bistroInfo.getData());
     }
 
     @GetMapping(path = "photo")
-    public ModelAndView photo(HttpServletRequest request){
-        HttpSession session =request.getSession(false);
-        String id = null;
-        String name = null;
-
-        if(session == null){
-            System.out.println("세션이 없습니다.");
-            return new ModelAndView("login");
-
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
-            System.out.println("세션이 있습니다.");
-        }
-        return new ModelAndView("photo").addObject("id", id).addObject("name",name);
-    }
-    //식당 상세정보 입력 페이지
-    // http://localhost:8888/mypage2
-    @GetMapping(path = "/mypage2")
-    public ModelAndView mypage2(HttpServletRequest request){
-        HttpSession session =request.getSession(false);
-        String id = null;
-        String name = null;
-
-        if(session == null){
-            System.out.println("세션이 없습니다.");
-            return new ModelAndView("login");
-
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
-            System.out.println("세션이 있습니다.");
-        }
-        return new ModelAndView("mypage2").addObject("id", id).addObject("name",name);
-    }
-
-    //리뷰 조회 페이지
-    // http://localhost:8888/reviewLookUp
-    @GetMapping(path = "reviewLookUp")
-    public ModelAndView reviewLookUp(HttpServletRequest request){
+    public ModelAndView photo(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String id = null;
         String name = null;
 
-        if(session == null){
+        if (session == null) {
             System.out.println("세션이 없습니다.");
             return new ModelAndView("login");
 
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
+            System.out.println("세션이 있습니다.");
+        }
+        return new ModelAndView("photo").addObject("id", id).addObject("name", name);
+    }
+
+    //식당 상세정보 입력 페이지
+    // http://3.38.50.114:8888/bisDetail
+    @GetMapping(path = "bisDetail")
+    public ModelAndView bisDetail(HttpServletRequest request) {
+        Header<BistroDetailApiResponse> bistroDetail = null;
+        HttpSession session = request.getSession(false);
+        String id = null;
+        String name = null;
+
+        if (session == null) {
+            System.out.println("세션이 없습니다.");
+            return new ModelAndView("login");
+
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
+            System.out.println("세션이 있습니다.");
+            bistroDetail = bistroDetailApiLogicService.read(name);
+        }
+        return new ModelAndView("mypage2").addObject("id", id).addObject("name", name).addObject("detail",bistroDetail.getData());
+    }
+
+    //리뷰 조회 페이지
+    // http://3.38.50.114:8888/reviewLookUp
+    @GetMapping(path = "reviewLookUp")
+    public ModelAndView reviewLookUp(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        String id = null;
+        String name = null;
+
+        if (session == null) {
+            System.out.println("세션이 없습니다.");
+            return new ModelAndView("login");
+
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
         return new ModelAndView("reviewLookUp")
                 .addObject("id", id)
-                .addObject("name",name);
+                .addObject("name", name);
     }
 
     // 매출 페이지
-    // http://localhost:8888/salesStatus
+    // http://3.38.50.114:8888/salesStatus
     @GetMapping(path = "salesStatus")
-    public ModelAndView salesStatus(HttpServletRequest request){
+    public ModelAndView salesStatus(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String id = null;
         String name = null;
 
-        if(session == null){
+        if (session == null) {
             System.out.println("세션이 없습니다.");
             return new ModelAndView("login");
 
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
         return new ModelAndView("sales_status");
     }
 
     @GetMapping(path = "capacity")
-    public ModelAndView capacity(HttpServletRequest request){
+    public ModelAndView capacity(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
+        Header<CapacityApiResponse> capacity = null;
         String id = null;
         String name = null;
 
-        if(session == null){
+        if (session == null) {
             System.out.println("세션이 없습니다.");
             return new ModelAndView("login");
 
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
             System.out.println("세션이 있습니다.");
+            capacity = capacityApiLogicService.read(name);
         }
-        return new ModelAndView("capacity");
+        return new ModelAndView("capacity").addObject("capacity", capacity.getData());
     }
+
     @GetMapping(path = "facility")
-    public ModelAndView facility(HttpServletRequest request){
+    public ModelAndView facility(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String id = null;
         String name = null;
 
-        if(session == null){
+        if (session == null) {
             System.out.println("세션이 없습니다.");
             return new ModelAndView("login");
 
-        }else{
-            id = (String)session.getAttribute("id");
-            name = (String)session.getAttribute("name");
+        } else {
+            id = (String) session.getAttribute("id");
+            name = (String) session.getAttribute("name");
             System.out.println("세션이 있습니다.");
         }
-        name = (String)session.getAttribute("name");
+        name = (String) session.getAttribute("name");
         String resaBisName = name;
         ModelAndView view = new ModelAndView("facility");
         Header<FacilityApiResponse> fac = facilityApiLogicService.find(resaBisName);
         System.out.println(fac.getData());
-        view.addObject("fac",fac.getData());
+        view.addObject("fac", fac.getData());
         return view;
     }
 

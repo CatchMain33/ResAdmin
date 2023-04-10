@@ -1,9 +1,7 @@
 package com.catchmind.resadmin.service;
 
-import com.catchmind.resadmin.model.entity.Menu;
 import com.catchmind.resadmin.model.entity.ResAdmin;
 import com.catchmind.resadmin.model.network.Header;
-import com.catchmind.resadmin.model.network.request.MenuApiRequest;
 import com.catchmind.resadmin.model.network.request.ResAdminApiRequest;
 import com.catchmind.resadmin.model.network.response.ResAdminApiResponse;
 import com.catchmind.resadmin.repository.ResAdminRepository;

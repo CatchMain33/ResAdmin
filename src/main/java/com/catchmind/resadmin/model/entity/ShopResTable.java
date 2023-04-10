@@ -1,7 +1,5 @@
 package com.catchmind.resadmin.model.entity;
 
-import com.catchmind.resadmin.model.config.Auditable2;
-import com.catchmind.resadmin.model.config.BaseEntity2;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 

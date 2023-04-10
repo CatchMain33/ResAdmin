@@ -71,8 +71,8 @@
           </header>
           <form>
             <div class="widget__content">
-              <input type="text" class="input-text" id="totcapacity" name="totcapacity" placeholder="테이블당 인원" style="padding-left: 12px;"/>
-              <input type="text" class="input-text" id="tottable" name="tottable" placeholder="총 테이블수" style="padding-left: 12px;"/>
+              <input type="text" th:field="${capacity.totCapacity}"class="input-text" id="totcapacity" name="totcapacity" placeholder="테이블당 인원" style="padding-left: 12px;"/>
+              <input type="text" th:field="${capacity.totTable}" class="input-text" id="tottable" name="tottable" placeholder="총 테이블수" style="padding-left: 12px;"/>
               <div style="width: 100%;display: flex;justify-content: flex-end;margin-top: 10px;">
                 <div style="text-align: right;">
                   <a id="bdBtn" class="btn red small" style="margin: 0;color: white">저장하기</a>

@@ -1,11 +1,9 @@
 package com.catchmind.resadmin.service;
 
-import com.catchmind.resadmin.model.entity.Reserve;
 import com.catchmind.resadmin.model.entity.ShopResTable;
 import com.catchmind.resadmin.model.entity.TotalTable;
 import com.catchmind.resadmin.model.network.Header;
 import com.catchmind.resadmin.model.network.request.ShopResTableApiRequest;
-import com.catchmind.resadmin.model.network.response.ReserveApiResponse;
 import com.catchmind.resadmin.model.network.response.ShopResTableApiResponse;
 import com.catchmind.resadmin.repository.CapacityRepository;
 import com.catchmind.resadmin.repository.ShopResTableRepository;
