@@ -3,13 +3,11 @@ package com.catchmind.resadmin.service;
 import com.catchmind.resadmin.dto.BisNoticeDto;
 import com.catchmind.resadmin.model.entity.BisNotice;
 import com.catchmind.resadmin.repository.BisNoticeRepository;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class BisNoticeApiLogicService {

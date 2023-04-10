@@ -6,9 +6,7 @@ window.onload = function(){
 
 function sendit(){
     const resaBisName = document.getElementById("resaBisName");
-    console.log(resaBisName.value);
     const bisDesc = document.getElementById("bisDesc");
-    console.log(bisDesc.value);
     const bisCategory = document.getElementById("bisCategory");
     const bisRegion = document.getElementById("bisRegion");
     const bisLunch = document.getElementById("bisLunch");
@@ -27,7 +25,7 @@ function sendit(){
     }
 
     if (bisRegion.value == "") {
-        alert('지역 입력하세요');
+        alert('지역 선택하세요!');
         bisRegion.focus()
         return false;
     }
@@ -63,7 +61,7 @@ function sendit(){
     })
         .then((res) => {
             alert('등록성공')
-            location.href='/mypage';
+            location.href="/bisInfo";
             return;
         })
         .then((data) => {

@@ -15,7 +15,7 @@ import java.util.Optional;
 public class CapacityApiLogicService extends BaseService<CapacityApiRequest, CapacityApiResponse, TotalTable> {
     private final CapacityRepository capacityRepository;
 
-    private CapacityApiResponse response(TotalTable capacity){
+    private CapacityApiResponse response(TotalTable capacity) {
         CapacityApiResponse capacityApiResponse = CapacityApiResponse.builder()
                 .totTableId(capacity.getTotTableId())
                 .resaBisName(capacity.getResaBisName())
@@ -44,17 +44,23 @@ public class CapacityApiLogicService extends BaseService<CapacityApiRequest, Cap
         return null;
     }
 
-    public Header<CapacityApiResponse> update11(String resaBisName,String totCapacity,String totTable){
+    public Header<CapacityApiResponse> update11(String resaBisName, String totCapacity, String totTable) {
         Optional<TotalTable> capacity = capacityRepository.findByResaBisName(resaBisName);
         return capacity.map(
-                        user->{
+                        user -> {
                             user.setTotCapacity(totCapacity);
                             user.setTotTable(totTable);
                             return user;
-                        }).map(user-> baseRepository.save(user))
-                .map(user->response(user))
+                        }).map(user -> baseRepository.save(user))
+                .map(user -> response(user))
                 .map(Header::OK)
-                .orElseGet(()->Header.ERROR("데이터 없음")
-        );
+                .orElseGet(() -> Header.ERROR("데이터 없음")
+                );
     }
+
+    public Header<CapacityApiResponse> read(String resaBisName) {
+        Optional<TotalTable> capacity = capacityRepository.findByResaBisName(resaBisName);
+        return capacity.map(user ->  response(user)).map(Header::OK).orElseGet(()->Header.ERROR("데이터 없음"));
+    }
+
 }

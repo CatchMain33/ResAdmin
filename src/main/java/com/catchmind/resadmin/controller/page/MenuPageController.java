@@ -5,7 +5,6 @@ import com.catchmind.resadmin.model.network.response.MenuApiResponse;
 import com.catchmind.resadmin.service.MenuApiLogicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,7 @@ public class MenuPageController {
     @Autowired
     private MenuApiLogicService menuApiLogicService;
     // 메뉴 관리 페이지
-    // http://localhost:8888/menuLookUp
+    // http://3.38.50.114:8888/menuLookUp
     @GetMapping(path = "menuLookUp")
     public ModelAndView menuLookUp(HttpServletRequest request){
         HttpSession session =request.getSession(false);
@@ -41,7 +40,7 @@ public class MenuPageController {
     }
 
     // 메뉴 등록 페이지
-    // http://localhost:8888/menuLookUp/regMenu
+    // http://3.38.50.114:8888/menuLookUp/regMenu
     @GetMapping(path = "menuLookUp/regMenu")
     public ModelAndView regMenu(HttpServletRequest request){
         HttpSession session =request.getSession(false);
@@ -63,7 +62,7 @@ public class MenuPageController {
     }
 
     // 메뉴 수정 페이지
-    // http://localhost:8888/menuModify
+    // http://3.38.50.114:8888/menuModify
 
     @GetMapping("/menuModify/{meIdx}")
     public ModelAndView menuModify(@PathVariable Long meIdx) {

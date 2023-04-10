@@ -38,13 +38,13 @@ public class LoginPageController {
                 .addObject("name",name);
     }
     // 로그인 페이지
-    // http://localhost:8888/login
+    // http://3.38.50.114:8888/login
     @GetMapping(path = "login")
     public ModelAndView login(){
         return new ModelAndView("login");
     }
 
-    @PostMapping(path="loginOk")  // http://localhost:8888/loginOk
+    @PostMapping(path="loginOk")  // http://3.38.50.114:8888/loginOk
     public String loginOk(HttpServletRequest request, String resaUserid, String resaUserpw){
         if(resAdminApiLogicService.read(resaUserid,resaUserpw).getData()!= null) {
             HttpSession session = request.getSession();
@@ -64,7 +64,7 @@ public class LoginPageController {
     }
 
     // 비밀번호 찾기
-    // http://localhost:8888/passwordChange
+    // http://3.38.50.114:8888/passwordChange
     @GetMapping(path = "passwordChange")
     public ModelAndView passwordChange(HttpServletRequest request){
         HttpSession session =request.getSession(false);
@@ -84,7 +84,7 @@ public class LoginPageController {
     }
 
     // 초기값 비밀번호 변경 페이지
-    // http://localhost:8888/rePassword
+    // http://3.38.50.114:8888/rePassword
     @GetMapping(path = "rePassword")
     public ModelAndView rePassword(HttpServletRequest request){
         HttpSession session =request.getSession(false);
@@ -104,7 +104,7 @@ public class LoginPageController {
     }
 
     // 비밀번호 수정 페이지
-    // http://localhost:8888/myModify
+    // http://3.38.50.114:8888/myModify
     @GetMapping(path = "myModify")
     public ModelAndView myModify(HttpServletRequest request){
         HttpSession session =request.getSession(false);

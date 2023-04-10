@@ -5,7 +5,6 @@ window.onload = function(){
 
 function sendit(){
     const resaBisName = document.getElementById("resaBisName");
-    const bdNotice = document.getElementById("bdNotice");
     const bdPark = document.getElementById("bdPark");
     const bdAddr = document.getElementById("bdAddr");
     const bdHp = document.getElementById("bdHp");
@@ -15,17 +14,13 @@ function sendit(){
     const bdHoliday = document.getElementById("bdHoliday");
     const bdHomepage = document.getElementById("bdHomepage");
 
+    console.log(bdCaution);
     if (bdAddr.value == "") {
         alert('식당 상세주소 입력하세요');
         bdAddr.focus()
         return false;
     }
 
-    if (bdHp.value == "") {
-        alert('식당 전화번호 입력하세요');
-        bdHp.focus()
-        return false;
-    }
 
     fetch('http://localhost:9999/api/admin2', {
         method: 'POST',
@@ -36,7 +31,6 @@ function sendit(){
             "description":"정상",
             "data":{
                 "resaBisName":`${resaBisName.value}`,
-                "bdNotice":`${bdNotice.value}`,
                 "bdPark":`${bdPark.value}`,
                 "bdAddr":`${bdAddr.value}`,
                 "bdHp":`${bdHp.value}`,
@@ -50,7 +44,7 @@ function sendit(){
     })
         .then((res) => {
             alert('등록성공')
-            location.href='/mypage2';
+            location.href='/bisDetail';
             return;
         })
         .then((data) => {
